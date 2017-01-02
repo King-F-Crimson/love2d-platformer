@@ -29,7 +29,14 @@ return {
       properties = {},
       terrains = {},
       tilecount = 64,
-      tiles = {}
+      tiles = {
+        {
+          id = 0,
+          properties = {
+            ["collidable"] = true
+          }
+        }
+      }
     }
   },
   layers = {
@@ -73,7 +80,9 @@ return {
       offsetx = 0,
       offsety = 0,
       draworder = "topdown",
-      properties = {},
+      properties = {
+        ["collidable"] = true
+      },
       objects = {
         {
           id = 11,
@@ -81,12 +90,14 @@ return {
           type = "",
           shape = "rectangle",
           x = 320,
-          y = 96,
+          y = 80,
           width = 16,
           height = 16,
           rotation = 0,
           visible = true,
-          properties = {}
+          properties = {
+            ["collidable"] = true
+          }
         }
       }
     }

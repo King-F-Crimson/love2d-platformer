@@ -2,6 +2,11 @@
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="24" height="16" tilewidth="16" tileheight="16" nextobjectid="15">
  <tileset firstgid="1" name="outdoor" tilewidth="16" tileheight="16" tilecount="64" columns="8">
   <image source="../assets/outdoor_tiles.png" trans="ffffff" width="128" height="128"/>
+  <tile id="0">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="Tiles" width="24" height="16">
   <data encoding="csv">
@@ -24,6 +29,13 @@
 </data>
  </layer>
  <objectgroup name="Spawn Points">
-  <object id="11" name="Player" x="320" y="96" width="16" height="16"/>
+  <properties>
+   <property name="collidable" type="bool" value="true"/>
+  </properties>
+  <object id="11" name="Player" x="320" y="80" width="16" height="16">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
