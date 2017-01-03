@@ -1,4 +1,5 @@
 require("run")
+require("state")
 require("states/menu")
 require("states/game")
 
@@ -7,7 +8,7 @@ application = {}
 function love.load()
     love.window.setMode(768, 512)
 
-    game.enter()
+    state.enter(menu)
 end
 
 function love.update(dt)

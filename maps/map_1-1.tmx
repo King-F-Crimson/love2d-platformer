@@ -32,10 +32,6 @@
   <properties>
    <property name="collidable" type="bool" value="true"/>
   </properties>
-  <object id="11" name="Player" x="320" y="80" width="16" height="16">
-   <properties>
-    <property name="collidable" type="bool" value="true"/>
-   </properties>
-  </object>
+  <object id="11" name="Player" x="320" y="80" width="16" height="16"/>
  </objectgroup>
 </map>

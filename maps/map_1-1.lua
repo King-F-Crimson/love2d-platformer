@@ -95,9 +95,7 @@ return {
           height = 16,
           rotation = 0,
           visible = true,
-          properties = {
-            ["collidable"] = true
-          }
+          properties = {}
         }
       }
     }

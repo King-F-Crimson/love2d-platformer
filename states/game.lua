@@ -4,7 +4,6 @@ local bump = require "../libs/bump_lua/bump"
 game = {}
 
 function game.enter()
-    application.state = game
     love.graphics.setDefaultFilter("nearest")
 
     map = sti("maps/map_1-1.lua", { "bump" })
@@ -61,20 +60,7 @@ function game.enter()
             movement.x = movement.x - 1
         end
 
-        layer.player.x, layer.player.y = world:move(layer.player, layer.player.x + movement.x, layer.player.y + movement.y, false)
-
-        -- if love.keyboard.isDown("w") then
-        --     self.player.y = self.player.y - 1
-        -- end
-        -- if love.keyboard.isDown("s") then
-        --     self.player.x = self.player.x + 1
-        -- end
-        -- if love.keyboard.isDown("r") then
-        --     self.player.y = self.player.y + 1
-        -- end
-        -- if love.keyboard.isDown("a") then
-        --     self.player.x = self.player.x - 1
-        -- end
+        layer.player.x, layer.player.y = world:move(layer.player, layer.player.x + movement.x, layer.player.y + movement.y)
     end
 
     map:removeLayer("Spawn Points")
