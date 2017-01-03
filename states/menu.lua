@@ -1,3 +1,5 @@
+require("states/game")
+
 menu = {}
 
 function menu.enter()
@@ -36,15 +38,12 @@ function menu.update()
 end
 
 function menu.draw()
-    love.graphics.scale(4)
-
-    love.graphics.setNewFont(12)
+    love.graphics.scale(2)
 
     for i = 1, item_count do
         if i == pointer then
-            love.graphics.setNewFont(14)
+            love.graphics.print('-', 10, 20 + (i * 14))
         end
-        love.graphics.print(items[i], 8, 20 + (i * 14))
-        love.graphics.setNewFont(12)
+        love.graphics.print(items[i], 20, 20 + (i * 14))
     end
 end

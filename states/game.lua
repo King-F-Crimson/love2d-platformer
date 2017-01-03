@@ -70,6 +70,7 @@ function game.enter()
     map:bump_init(world)
 
     world:add(layer.player, layer.player.x, layer.player.y, 16, 16)
+    -- Add the player collidable object to map collidables so it's drawn in map:bump_draw(world)
     table.insert(map.bump_collidables, layer.player)
 end
 

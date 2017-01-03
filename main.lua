@@ -1,12 +1,20 @@
 require("run")
 require("state")
 require("states/menu")
-require("states/game")
 
 application = {}
+application.assets = {}
 
 function love.load()
     love.window.setMode(768, 512)
+
+    application.assets.font = love.graphics.newImageFont("assets/Resource-Imagefont.png",
+    " abcdefghijklmnopqrstuvwxyz" ..
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ0" ..
+    "123456789.,!?-+/():;%&`'*#=[]\"")
+    application.assets.font:setFilter( "nearest" )
+
+    love.graphics.setFont(application.assets.font)
 
     state.enter(menu)
 end
