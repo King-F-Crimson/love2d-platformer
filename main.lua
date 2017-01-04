@@ -7,6 +7,7 @@ application.assets = {}
 
 function love.load()
     love.window.setMode(768, 512)
+    love.graphics.setDefaultFilter("nearest")
 
     application.assets.font = love.graphics.newImageFont("assets/Resource-Imagefont.png",
     " abcdefghijklmnopqrstuvwxyz" ..

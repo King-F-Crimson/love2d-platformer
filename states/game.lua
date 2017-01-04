@@ -1,19 +1,19 @@
 local sti = require "../libs/Simple-Tiled-Implementation/sti"
 local bump = require "../libs/bump_lua/bump"
 
+require("../player")
+
 game = {}
 
 function game.enter()
-    love.graphics.setDefaultFilter("nearest")
-
     map = sti("maps/map_1-1.lua", { "bump" })
     local layer = map:addCustomLayer("Sprites", 3)
 
     -- Get player spawn object
-    local player
+    local player_spawn
     for k, object in pairs(map.objects) do
         if object.name == "Player" then
-            player = object
+            player_spawn = object
             break
         end
     end
@@ -22,45 +22,18 @@ function game.enter()
     local sprite = love.graphics.newImage("assets/player.png")
     layer.player = {
         sprite = sprite,
-        x      = player.x,
-        y      = player.y,
-        ox = 0,
-        oy = 0,
+        x      = player_spawn.x,
+        y      = player_spawn.y,
     }
+    layer.player = player:new(layer.player)
 
     -- Draw the player and a point
     layer.draw = function(self)
-        love.graphics.draw(
-            self.player.sprite,
-            math.floor(self.player.x),
-            math.floor(self.player.y),
-            0,
-            1,
-            1,
-            self.player.ox,
-            self.player.oy
-        )
-        -- love.graphics.setPointSize(5)
-        -- love.graphics.points(math.floor(self.player.x), math.floor(self.player.y))
+        self.player:draw()
     end
 
     layer.update = function(self, dt)
-        movement = {x = 0, y = 0}
-
-        if love.keyboard.isDown("w") then
-            movement.y = movement.y - 1
-        end
-        if love.keyboard.isDown("s") then
-            movement.x = movement.x + 1
-        end
-        if love.keyboard.isDown("r") then
-            movement.y = movement.y + 1
-        end
-        if love.keyboard.isDown("a") then
-            movement.x = movement.x - 1
-        end
-
-        layer.player.x, layer.player.y = world:move(layer.player, layer.player.x + movement.x, layer.player.y + movement.y)
+        self.player:move()
     end
 
     map:removeLayer("Spawn Points")
@@ -70,6 +43,7 @@ function game.enter()
     map:bump_init(world)
 
     world:add(layer.player, layer.player.x, layer.player.y, 16, 16)
+    layer.player.world = world
     -- Add the player collidable object to map collidables so it's drawn in map:bump_draw(world)
     table.insert(map.bump_collidables, layer.player)
 end
