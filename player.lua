@@ -12,21 +12,6 @@ player = {
 }
 
 function grounded.move(player)
-    -- local movement = {x = 0, y = 0}
-
-    -- if love.keyboard.isDown("up") then
-    --     movement.y = movement.y - 1
-    -- end
-    -- if love.keyboard.isDown("right") then
-    --     movement.x = movement.x + 1
-    -- end
-    -- if love.keyboard.isDown("down") then
-    --     movement.y = movement.y + 1
-    -- end
-    -- if love.keyboard.isDown("left") then
-    --     movement.x = movement.x - 1
-    -- end
-
     if love.keyboard.isDown("space") then
         grounded.jump(player)
     end
@@ -36,20 +21,39 @@ function grounded.move(player)
     end
     if love.keyboard.isDown("right") then
         player.velocity.x = 2
-    en
+    end
 
     player.x, player.y = world:move(player, player.x + player.velocity.x, player.y + player.velocity.y)
+
+    if not player:is_grounded() then
+        player.state = airborne
+    end
 end
 
 function grounded.jump(player)
-    player.velocity.y = -4
+    player.velocity.y = -10
     player.state = airborne
 end
 
 function airborne.move(player)
-    player.velocity.y = player.velocity.y + 0.1
+    player.velocity.y = player.velocity.y + 0.4
 
     player.x, player.y, cols, len = world:move(player, player.x + player.velocity.x, player.y + player.velocity.y)
+
+    if player:is_grounded() then
+        player.velocity.y = 0
+        player.state = grounded
+    end
+    if player:hits_ceiling() then
+        player.velocity.y = 0
+    end
+end
+
+function player:is_grounded()
+    is_grounded = false
+
+    -- Check collision for everything one pixel under the player.
+    x, y, cols, len = world:check(self, self.x, self.y + 1)
 
     -- Check if the player hits ground.
     for i = 1, len do
@@ -57,15 +61,30 @@ function airborne.move(player)
         local normal = cols[i].normal
         -- True if item hits solid object and collides from top.
         if other.properties.solid and normal.x == 0 and normal.y == -1 then
-            player.velocity.y = 0
-            player.state = grounded
-            print("Landed successfully")
+            is_grounded = true
         end
     end
+
+    return is_grounded
 end
 
-function airborne.is_hitting_ground(player)
-    local y_result = world:check(player, player.x + 1)
+function player:hits_ceiling()
+    hits_ceiling = false
+
+    -- Check collision for everything one pixel above the player.
+    x, y, cols, len = world:check(self, self.x, self.y - 1)
+
+    -- Check if the player hits ceiling.
+    for i = 1, len do
+        local other = cols[i].other
+        local normal = cols[i].normal
+        -- True if item hits solid object and collides from bottom.
+        if other.properties.solid and normal.x == 0 and normal.y == 1 then
+            hits_ceiling = true
+        end
+    end
+
+    return hits_ceiling
 end
 
 function player:new(o)
@@ -80,8 +99,15 @@ function player:move()
 end
 
 function player:draw()
+    local sprite = nil
+    if self.state == grounded then
+        sprite = self.sprite
+    else
+        sprite = self.air_sprite
+    end
+
     love.graphics.draw(
-        self.sprite,
+        sprite,
         self.x,
         self.y
     )

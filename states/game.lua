@@ -6,7 +6,7 @@ require("../player")
 game = {}
 
 function game.enter()
-    map = sti("maps/map_1-1.lua", { "bump" })
+    map = sti("maps/map_1-2.lua", { "bump" })
     local layer = map:addCustomLayer("Sprites", 3)
 
     -- Get player spawn object
@@ -22,7 +22,9 @@ function game.enter()
     layer.player = player:new()
 
     local sprite = love.graphics.newImage("assets/player.png")
+    local air_sprite = love.graphics.newImage("assets/player_air.png")
     layer.player.sprite = sprite
+    layer.player.air_sprite = air_sprite
     layer.player.x      = player_spawn.x
     layer.player.y      = player_spawn.y
 
