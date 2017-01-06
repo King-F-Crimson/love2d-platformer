@@ -8,7 +8,7 @@ player = {
     x = 0,
     y = 0,
     velocity = { x = 0, y = 0 },
-    state = grounded,
+    state = airborne,
 }
 
 function grounded.move(player)
@@ -30,6 +30,13 @@ function grounded.move(player)
     if love.keyboard.isDown("space") then
         grounded.jump(player)
     end
+    player.velocity.x = 0
+    if love.keyboard.isDown("left") then
+        player.velocity.x = -2
+    end
+    if love.keyboard.isDown("right") then
+        player.velocity.x = 2
+    en
 
     player.x, player.y = world:move(player, player.x + player.velocity.x, player.y + player.velocity.y)
 end
@@ -40,7 +47,7 @@ function grounded.jump(player)
 end
 
 function airborne.move(player)
-    player.velocity.y = player.velocity.y + 1
+    player.velocity.y = player.velocity.y + 0.1
 
     player.x, player.y, cols, len = world:move(player, player.x + player.velocity.x, player.y + player.velocity.y)
 
