@@ -19,13 +19,12 @@ function game.enter()
     end
 
     -- Create the player entity
+    layer.player = player:new()
+
     local sprite = love.graphics.newImage("assets/player.png")
-    layer.player = {
-        sprite = sprite,
-        x      = player_spawn.x,
-        y      = player_spawn.y,
-    }
-    layer.player = player:new(layer.player)
+    layer.player.sprite = sprite
+    layer.player.x      = player_spawn.x
+    layer.player.y      = player_spawn.y
 
     -- Draw the player and a point
     layer.draw = function(self)

@@ -33,7 +33,8 @@ return {
         {
           id = 0,
           properties = {
-            ["collidable"] = true
+            ["collidable"] = true,
+            ["solid"] = true
           }
         }
       }
