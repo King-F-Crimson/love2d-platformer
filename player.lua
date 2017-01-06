@@ -12,15 +12,16 @@ player = {
 }
 
 function grounded.move(player)
+    player.velocity.y = 0
+
     if love.keyboard.isDown("space") then
         grounded.jump(player)
     end
-    player.velocity.x = 0
     if love.keyboard.isDown("left") then
-        player.velocity.x = -2
+        player:accelerate(-player.acceleration, player.max_speed)
     end
     if love.keyboard.isDown("right") then
-        player.velocity.x = 2
+        player:accelerate(player.acceleration, player.max_speed)
     end
 
     player.x, player.y = world:move(player, player.x + player.velocity.x, player.y + player.velocity.y)
@@ -38,10 +39,16 @@ end
 function airborne.move(player)
     player.velocity.y = player.velocity.y + 0.4
 
+    if love.keyboard.isDown("left") then
+        player:accelerate(-player.acceleration, player.max_speed)
+    end
+    if love.keyboard.isDown("right") then
+        player:accelerate(player.acceleration, player.max_speed)
+    end
+
     player.x, player.y, cols, len = world:move(player, player.x + player.velocity.x, player.y + player.velocity.y)
 
     if player:is_grounded() then
-        player.velocity.y = 0
         player.state = grounded
     end
     if player:hits_ceiling() then
@@ -86,6 +93,17 @@ function player:hits_ceiling()
 
     return hits_ceiling
 end
+
+function player:accelerate(a, max_speed)
+    player.velocity.x = player.velocity.x + a
+    -- Cap the speed at the limit, both negative or positive velocity.
+    if player.velocity.x > max_speed then
+        player.velocity.x = max_speed
+    elseif player.velocity.x < -max_speed then
+        player.velocity.x = -max_speed
+    end
+end
+
 
 function player:new(o)
     o = o or {}
