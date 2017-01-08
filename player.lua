@@ -1,5 +1,4 @@
-local grounded = {}
-local airborne = {}
+require("movement")
 
 player = {
     acceleration = 1,
@@ -10,100 +9,6 @@ player = {
     velocity = { x = 0, y = 0 },
     state = airborne,
 }
-
-function grounded.move(player)
-    player.velocity.y = 0
-
-    if love.keyboard.isDown("space") then
-        grounded.jump(player)
-    end
-    if love.keyboard.isDown("left") then
-        player:accelerate(-player.acceleration, player.max_speed)
-    end
-    if love.keyboard.isDown("right") then
-        player:accelerate(player.acceleration, player.max_speed)
-    end
-
-    player.x, player.y = world:move(player, player.x + player.velocity.x, player.y + player.velocity.y)
-
-    if not player:is_grounded() then
-        player.state = airborne
-    end
-end
-
-function grounded.jump(player)
-    player.velocity.y = -10
-    player.state = airborne
-end
-
-function airborne.move(player)
-    player.velocity.y = player.velocity.y + 0.4
-
-    if love.keyboard.isDown("left") then
-        player:accelerate(-player.acceleration, player.max_speed)
-    end
-    if love.keyboard.isDown("right") then
-        player:accelerate(player.acceleration, player.max_speed)
-    end
-
-    player.x, player.y, cols, len = world:move(player, player.x + player.velocity.x, player.y + player.velocity.y)
-
-    if player:is_grounded() then
-        player.state = grounded
-    end
-    if player:hits_ceiling() then
-        player.velocity.y = 0
-    end
-end
-
-function player:is_grounded()
-    is_grounded = false
-
-    -- Check collision for everything one pixel under the player.
-    x, y, cols, len = world:check(self, self.x, self.y + 1)
-
-    -- Check if the player hits ground.
-    for i = 1, len do
-        local other = cols[i].other
-        local normal = cols[i].normal
-        -- True if item hits solid object and collides from top.
-        if other.properties.solid and normal.x == 0 and normal.y == -1 then
-            is_grounded = true
-        end
-    end
-
-    return is_grounded
-end
-
-function player:hits_ceiling()
-    hits_ceiling = false
-
-    -- Check collision for everything one pixel above the player.
-    x, y, cols, len = world:check(self, self.x, self.y - 1)
-
-    -- Check if the player hits ceiling.
-    for i = 1, len do
-        local other = cols[i].other
-        local normal = cols[i].normal
-        -- True if item hits solid object and collides from bottom.
-        if other.properties.solid and normal.x == 0 and normal.y == 1 then
-            hits_ceiling = true
-        end
-    end
-
-    return hits_ceiling
-end
-
-function player:accelerate(a, max_speed)
-    player.velocity.x = player.velocity.x + a
-    -- Cap the speed at the limit, both negative or positive velocity.
-    if player.velocity.x > max_speed then
-        player.velocity.x = max_speed
-    elseif player.velocity.x < -max_speed then
-        player.velocity.x = -max_speed
-    end
-end
-
 
 function player:new(o)
     o = o or {}
