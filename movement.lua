@@ -1,53 +1,94 @@
-grounded = {}
-airborne = {}
+require("control")
 
-function grounded.move(entity)
-    entity.velocity.y = 0
+standing = {}
+walking  = {}
+jumping  = {}
+falling  = {}
 
-    if love.keyboard.isDown("space") then
-        grounded.jump(entity)
+function standing:move(entity)
+    if love.keyboard.isDown(control.move_left) then
+        entity.state = walking
     end
-    if love.keyboard.isDown("left") then
-        accelerate(entity, -entity.acceleration, entity.max_speed)
+    if love.keyboard.isDown(control.move_right) then
+        entity.state = walking
     end
-    if love.keyboard.isDown("right") then
-        accelerate(entity, entity.acceleration, entity.max_speed)
-    end
-
     apply_friction(entity)
-
-    entity.x, entity.y = world:move(entity, entity.x + entity.velocity.x, entity.y + entity.velocity.y)
-
-    if not is_grounded(entity) then
-        entity.state = airborne
+    if love.keyboard.isDown(control.jump) then
+        entity.state = jumping
+        jumping:enter(entity)
     end
 end
 
-function grounded.jump(entity)
-    entity.velocity.y = -10
-    entity.state = airborne
+function standing:enter(entity)
+    entity.acceleration.x, entity.velocity.y = 0, 0
 end
 
-function airborne.move(entity)
-    entity.velocity.y = entity.velocity.y + 0.4
-
-    if love.keyboard.isDown("left") then
-        accelerate(entity, -entity.acceleration, entity.max_speed)
+function walking:move(entity)
+    horizontal_move(entity)
+    if love.keyboard.isDown(control.jump) then
+        entity.state = jumping
+        jumping:enter(entity)
     end
-    if love.keyboard.isDown("right") then
-        accelerate(entity, entity.acceleration, entity.max_speed)
+end
+
+function apply_friction(entity)
+    entity.velocity.x = entity.velocity.x * 0.8
+end
+
+function jumping:move(entity)
+    horizontal_move(entity)
+    entity.acceleration.y = -1
+    if self.jump_length ~= 0 then
+        self.jump_length = self.jump_length - 1
     end
+    -- Make the player fall when it reach max jump length, hits ceiling, or jump button is released.
+    if self.jump_length == 0 or hits_ceiling(entity) or not love.keyboard.isDown(control.jump) then
+        entity.state = falling
+    end
+end
 
-    apply_friction(entity)
+function jumping:enter(entity)
+    self.jump_length = 30
+    entity.velocity.y = -2
+end
 
-    entity.x, entity.y, cols, len = world:move(entity, entity.x + entity.velocity.x, entity.y + entity.velocity.y)
-
+function falling:move(entity)
+    horizontal_move(entity)
+    entity.acceleration.y = 1
     if is_grounded(entity) then
-        entity.state = grounded
+        entity.state = standing
+        standing:enter(entity)
     end
-    if hits_ceiling(entity) then
-        entity.velocity.y = 0
+end
+
+function update_spatial(entity)
+    -- Update velocity based on acceleration.
+    entity.velocity.x, entity.velocity.y = entity.velocity.x + entity.acceleration.x, entity.velocity.y + entity.acceleration.y
+
+    -- Cap speed.
+    if entity.velocity.x > entity.max_speed.x then
+        entity.velocity.x = entity.max_speed.x
+    elseif entity.velocity.x < -entity.max_speed.x then
+        entity.velocity.x = -entity.max_speed.x
     end
+    if entity.velocity.y > entity.max_speed.y then
+        entity.velocity.y = entity.max_speed.y
+    elseif entity.velocity.y < -entity.max_speed.y then
+        entity.velocity.y = -entity.max_speed.y
+    end
+    
+    entity.x, entity.y = world:move(entity, entity.x + entity.velocity.x, entity.y + entity.velocity.y)
+end
+
+function horizontal_move(entity)
+    entity.acceleration.x = 0
+    if love.keyboard.isDown(control.move_left) then
+        entity.acceleration.x = entity.acceleration.x - 1
+    end
+    if love.keyboard.isDown(control.move_right) then
+        entity.acceleration.x = entity.acceleration.x + 1
+    end
+    apply_friction(entity)
 end
 
 function is_grounded(entity)
@@ -86,19 +127,4 @@ function hits_ceiling(entity)
     end
 
     return hits_ceiling
-end
-
-function accelerate(entity, a, max_speed)
-    entity.velocity.x = entity.velocity.x + a
-    -- Cap the speed at the limit, both negative or positive velocity.
-    if entity.velocity.x > max_speed then
-        entity.velocity.x = max_speed
-    elseif entity.velocity.x < -max_speed then
-        entity.velocity.x = -max_speed
-    end
-end
-
--- TODO: set the velocity to 0 when close enough to 0
-function apply_friction(entity, a, max_speed)
-    entity.velocity.x = entity.velocity.x * 0.8
 end
