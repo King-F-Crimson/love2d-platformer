@@ -24,6 +24,8 @@ end
 
 -- Walking control
 function walking:enter(entity)
+    entity.velocity.y = 0
+    entity.acceleration.y = 0
     return self
 end
 
@@ -31,27 +33,28 @@ function walking:move(entity, input)
     if not input.left and not input.right then
         entity.state = standing:enter(entity)
     else
-        x_velocity = 0
-        if input.left  then x_velocity = x_velocity - 2 end
-        if input.right then x_velocity = x_velocity + 2 end
-        entity.velocity.x = x_velocity
-
+        movement.horizontal_move(entity, input)
         if input.jump then
             entity.state = jumping:enter(entity)
+        elseif not movement.is_grounded(entity) then
+            entity.state = falling:enter(entity)
         end
     end
 end
 
 -- Jumping control
 function jumping:enter(entity)
-    entity.velocity.y = -4
-    self.jump_length = 60
+    entity.velocity.y = -5
+    self.jump_length = 20
+    self.minimum_length = 15
 
     return self
 end
 
 function jumping:move(entity, input)
-    if input.jump and self.jump_length ~= 0 then
+    movement.horizontal_move(entity, input)
+    if ((input.jump or self.jump_length > self.minimum_length) and self.jump_length ~= 0)
+    and not movement.hits_ceiling(entity) then
         self.jump_length = self.jump_length - 1
     else
         self.jump_length = 0
@@ -66,8 +69,13 @@ function falling:enter(entity)
 end
 
 function falling:move(entity, input)
+    movement.horizontal_move(entity, input)
     if movement.is_grounded(entity) then
-        entity.state = standing:enter(entity)
+        if entity.velocity.x == 0 then
+            entity.state = standing:enter(entity)
+        else
+            entity.state = walking:enter(entity)
+        end
     end
 end
 
@@ -108,6 +116,32 @@ function movement.is_grounded(entity)
     end
 
     return is_grounded
+end
+
+function movement.hits_ceiling(entity)
+    local hits_ceiling = false
+
+    -- Check collision for everything one pixel above the entity.
+    x, y, cols, len = world:check(entity, entity.x, entity.y - 1)
+
+    -- Check if the entity hits ceiling.
+    for i = 1, len do
+        local other = cols[i].other
+        local normal = cols[i].normal
+        -- True if item hits solid object and collides from bottom.
+        if other.properties.solid and normal.x == 0 and normal.y == 1 then
+            hits_ceiling = true
+        end
+    end
+
+    return hits_ceiling
+end
+
+function movement.horizontal_move(entity, input)
+    x_velocity = 0
+    if input.left  then x_velocity = x_velocity - 3 end
+    if input.right then x_velocity = x_velocity + 3 end
+    entity.velocity.x = x_velocity
 end
 
 -- require("control")
