@@ -64,7 +64,7 @@ end
 
 -- Falling control
 function falling:enter(entity)
-    entity.acceleration.y = 2
+    entity.acceleration.y = 0.5
     return self
 end
 
