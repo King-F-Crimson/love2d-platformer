@@ -34,7 +34,7 @@ function game.enter()
     end
 
     layer.update = function(self, dt)
-        self.player:move()
+        self.player:update()
     end
 
     map:removeLayer("Spawn Points")

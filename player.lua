@@ -5,7 +5,7 @@ player = {
     y = 0,
     velocity =     { x = 0, y = 0 },
     acceleration = { x = 0, y = 0 },
-    max_speed =    { x = 4, y = 4 },
+    max_speed =    { x = 6, y = 6 },
     state = standing,
     properties = { floating = false }
 }
@@ -17,9 +17,23 @@ function player:new(o)
     return o
 end
 
-function player:move()
-    self.state:move(self)
-    update_spatial(self)
+function player:update()
+    local input = self:get_input()
+    self:move(input)
+end
+
+function player:get_input()
+    local input = { left = false, right = false, jump = false }
+    input.left = love.keyboard.isDown("left") or love.keyboard.isDown("a")
+    input.right = love.keyboard.isDown("right") or love.keyboard.isDown("s")
+    input.jump = love.keyboard.isDown("up") or love.keyboard.isDown("space")
+
+    return input
+end
+
+function player:move(input)
+    self.state:move(self, input)
+    movement.update_spatial(self)
 end
 
 function player:draw()
