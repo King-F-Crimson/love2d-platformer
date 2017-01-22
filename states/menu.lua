@@ -27,7 +27,7 @@ function menu.enter()
                 pointer = pointer + 1
             end
         end
-        if key == "return" then
+        if key == "return" or key == "space" then
             actions[pointer]()
         end
     end

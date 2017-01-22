@@ -1,7 +1,7 @@
 local sti = require "../libs/Simple-Tiled-Implementation/sti"
 local bump = require "../libs/bump_lua/bump"
 
-require("../player")
+require("player")
 
 game = {}
 
@@ -48,8 +48,11 @@ function game.enter()
     -- Add the player collidable object to map collidables so it's drawn in map:bump_draw(world)
     table.insert(map.bump_collidables, layer.player)
 
-    -- Set the love.keypressed function to send signal to the Player object.
+    -- Set the love.keypressed function to change back to menu state and to send signal to the Player object.
     function love.keypressed(key)
+        if key == "p" then
+            state.enter(menu)
+        end
         if key == "space" or key == "up" then
             layer.player.jump_pressed = true
         end
