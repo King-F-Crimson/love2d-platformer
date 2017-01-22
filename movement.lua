@@ -17,8 +17,8 @@ function standing:move(entity, input)
     if input.left or input.right then
         entity.state = walking:enter(entity)
     end
-    if entity.jump_pressed then
-        entity.jump_pressed = false
+    if entity.ready_jump then
+        entity.ready_jump = false
         entity.state = jumping:enter(entity)
     end
 end
@@ -35,8 +35,8 @@ function walking:move(entity, input)
         entity.state = standing:enter(entity)
     else
         movement.horizontal_move(entity, input)
-        if entity.jump_pressed then
-            entity.jump_pressed = false
+        if entity.ready_jump then
+            entity.ready_jump = false
             entity.state = jumping:enter(entity)
         elseif not movement.is_grounded(entity) then
             entity.state = falling:enter(entity)

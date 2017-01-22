@@ -50,3 +50,9 @@ function player:draw()
         self.y
     )
 end
+
+function player:jump_pressed()
+    if self.state == standing or self.state == walking then
+        self.ready_jump = true
+    end
+end

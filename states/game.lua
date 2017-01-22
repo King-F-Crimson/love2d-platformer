@@ -54,7 +54,7 @@ function game.enter()
             state.enter(menu)
         end
         if key == "space" or key == "up" then
-            layer.player.jump_pressed = true
+            layer.player:jump_pressed()
         end
     end
 end
