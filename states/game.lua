@@ -43,10 +43,17 @@ function game.enter()
     world = bump.newWorld(16)
     map:bump_init(world)
 
-    world:add(layer.player, layer.player.x, layer.player.y, 16, 16)
+    world:add(layer.player, layer.player.x, layer.player.y, 16, 30)
     layer.player.world = world
     -- Add the player collidable object to map collidables so it's drawn in map:bump_draw(world)
     table.insert(map.bump_collidables, layer.player)
+
+    -- Set the love.keypressed function to send signal to the Player object.
+    function love.keypressed(key)
+        if key == "space" or key == "up" then
+            layer.player.jump_pressed = true
+        end
+    end
 end
 
 function game.update(dt)

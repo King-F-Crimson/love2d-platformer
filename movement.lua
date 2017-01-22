@@ -17,7 +17,8 @@ function standing:move(entity, input)
     if input.left or input.right then
         entity.state = walking:enter(entity)
     end
-    if input.jump then
+    if entity.jump_pressed then
+        entity.jump_pressed = false
         entity.state = jumping:enter(entity)
     end
 end
@@ -34,7 +35,8 @@ function walking:move(entity, input)
         entity.state = standing:enter(entity)
     else
         movement.horizontal_move(entity, input)
-        if input.jump then
+        if entity.jump_pressed then
+            entity.jump_pressed = false
             entity.state = jumping:enter(entity)
         elseif not movement.is_grounded(entity) then
             entity.state = falling:enter(entity)
@@ -45,26 +47,29 @@ end
 -- Jumping control
 function jumping:enter(entity)
     entity.velocity.y = -5
-    self.jump_length = 20
-    self.minimum_length = 15
+    self.jump_length = 15
+    self.minimum_length = 10
 
     return self
 end
 
 function jumping:move(entity, input)
     movement.horizontal_move(entity, input)
-    if ((input.jump or self.jump_length > self.minimum_length) and self.jump_length ~= 0)
-    and not movement.hits_ceiling(entity) then
-        self.jump_length = self.jump_length - 1
+    if not movement.hits_ceiling(entity) then
+        if ((input.jump or self.jump_length > self.minimum_length) and self.jump_length ~= 0) then
+            self.jump_length = self.jump_length - 1
+        else
+            entity.state = falling:enter(entity)
+        end
     else
-        self.jump_length = 0
+        entity.velocity.y = 0
         entity.state = falling:enter(entity)
     end
 end
 
 -- Falling control
 function falling:enter(entity)
-    entity.acceleration.y = 0.5
+    entity.acceleration.y = 0.8
     return self
 end
 

@@ -24,9 +24,9 @@ end
 
 function player:get_input()
     local input = { left = false, right = false, jump = false }
-    input.left = love.keyboard.isDown("left") or love.keyboard.isDown("a")
+    input.left  = love.keyboard.isDown("left")  or love.keyboard.isDown("a")
     input.right = love.keyboard.isDown("right") or love.keyboard.isDown("s")
-    input.jump = love.keyboard.isDown("up") or love.keyboard.isDown("space")
+    input.jump  = love.keyboard.isDown("up")    or love.keyboard.isDown("space")
 
     return input
 end
