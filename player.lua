@@ -39,9 +39,9 @@ end
 function player:draw()
     local sprite = nil
     if self.state == standing or self.state == walking then
-        sprite = self.sprite
+        sprite = self.stand_sprite
     else
-        sprite = self.air_sprite
+        sprite = self.stand_sprite
     end
 
     love.graphics.draw(

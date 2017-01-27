@@ -21,10 +21,10 @@ function game.enter()
     -- Create the player entity
     layer.player = player:new()
 
-    local sprite = love.graphics.newImage("assets/player.png")
-    local air_sprite = love.graphics.newImage("assets/player_air.png")
-    layer.player.sprite = sprite
-    layer.player.air_sprite = air_sprite
+    local stand_sprite = love.graphics.newImage("assets/trump_stand.png")
+    local walk_sprite = love.graphics.newImage("assets/trump_walk.png")
+    layer.player.stand_sprite = stand_sprite
+    layer.player.walk_sprite = walk_sprite
     layer.player.x      = player_spawn.x
     layer.player.y      = player_spawn.y
 
@@ -43,7 +43,7 @@ function game.enter()
     world = bump.newWorld(16)
     map:bump_init(world)
 
-    world:add(layer.player, layer.player.x, layer.player.y, 16, 30)
+    world:add(layer.player, layer.player.x, layer.player.y, 16, 16)
     layer.player.world = world
     -- Add the player collidable object to map collidables so it's drawn in map:bump_draw(world)
     table.insert(map.bump_collidables, layer.player)
