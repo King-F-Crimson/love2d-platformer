@@ -1,5 +1,6 @@
 local sti = require "../libs/Simple-Tiled-Implementation/sti"
 local bump = require "../libs/bump_lua/bump"
+local anim8 = require '../libs/anim8/anim8'
 
 require("player")
 
@@ -23,6 +24,10 @@ function game.enter()
 
     local stand_sprite = love.graphics.newImage("assets/trump_stand.png")
     local walk_sprite = love.graphics.newImage("assets/trump_walk.png")
+    local stand_grid = anim8.newGrid(16, 16, stand_sprite:getWidth(), stand_sprite:getHeight())
+    local walk_grid = anim8.newGrid(16, 16, walk_sprite:getWidth(), walk_sprite:getHeight())
+    layer.player.stand_animation = anim8.newAnimation(stand_grid('1-2', 1), 24)
+    layer.player.walk_animation = anim8.newAnimation(walk_grid('1-4', 1), 12)
     layer.player.stand_sprite = stand_sprite
     layer.player.walk_sprite = walk_sprite
     layer.player.x      = player_spawn.x
@@ -34,7 +39,7 @@ function game.enter()
     end
 
     layer.update = function(self, dt)
-        self.player:update()
+        self.player:update(dt)
     end
 
     map:removeLayer("Spawn Points")

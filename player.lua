@@ -17,7 +17,11 @@ function player:new(o)
     return o
 end
 
-function player:update()
+function player:update(dt)
+    -- Should the animation not use dt but frame count?
+    self.walk_animation:update(1)
+    self.walk_animation:update(1)
+
     local input = self:get_input()
     self:move(input)
 end
@@ -37,14 +41,17 @@ function player:move(input)
 end
 
 function player:draw()
+    local animation = nil
     local sprite = nil
-    if self.state == standing or self.state == walking then
+    if self.state == standing then
+        animation = self.stand_animation
         sprite = self.stand_sprite
-    else
-        sprite = self.stand_sprite
+    elseif self.state == walking then
+        animation = self.walk_animation
+        sprite = self.walk_sprite
     end
 
-    love.graphics.draw(
+    animation:draw(
         sprite,
         self.x,
         self.y
