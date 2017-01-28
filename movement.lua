@@ -147,6 +147,12 @@ function movement.horizontal_move(entity, input)
     if input.left  then x_velocity = x_velocity - 3 end
     if input.right then x_velocity = x_velocity + 3 end
     entity.velocity.x = x_velocity
+
+    if x_velocity > 0 then
+        entity.facing_right = true
+    elseif x_velocity < 0 then
+        entity.facing_right = false
+    end
 end
 
 -- require("control")

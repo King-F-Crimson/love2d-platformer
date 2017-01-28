@@ -10,6 +10,7 @@ player = {
     acceleration = { x = 0, y = 0 },
     max_speed =    { x = 6, y = 6 },
     state = standing,
+    facing_right = true,
     properties = { floating = false }
 }
 
@@ -69,11 +70,11 @@ function player:draw()
         sprite = self.fall_sprite
     end
 
-    animation:draw(
-        sprite,
-        self.x,
-        self.y
-    )
+    if self.facing_right then
+        animation:draw(sprite, self.x, self.y, 0, 1, 1)
+    else
+        animation:draw(sprite, self.x + 16, self.y, 0, -1, 1)
+    end
 end
 
 function player:jump_pressed()
