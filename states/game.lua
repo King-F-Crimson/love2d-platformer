@@ -20,16 +20,21 @@ function game.enter()
     end
 
     -- Create the player entity
-    layer.player = player:new()
-    layer.player:init(player_spawn)
+    layer.entities = {}
+    layer.entities.player = player:new()
+    layer.entities.player:init(player_spawn)
 
-    -- Draw the player and a point
-    layer.draw = function(self)
-        self.player:draw()
+    -- Draw the every entity in the layer.
+    function layer:draw()
+        for k, entity in pairs(self.entities) do
+            entity:draw()
+        end
     end
 
     layer.update = function(self, dt)
-        self.player:update(dt)
+        for k, entity in pairs(self.entities) do
+            entity:update(dt)
+        end
     end
 
     map:removeLayer("Spawn Points")
@@ -38,10 +43,10 @@ function game.enter()
     world = bump.newWorld(16)
     map:bump_init(world)
 
-    world:add(layer.player, layer.player.x, layer.player.y, 16, 16)
-    layer.player.world = world
+    world:add(layer.entities.player, layer.entities.player.x, layer.entities.player.y, 16, 16)
+    layer.entities.player.world = world
     -- Add the player collidable object to map collidables so it's drawn in map:bump_draw(world)
-    table.insert(map.bump_collidables, layer.player)
+    table.insert(map.bump_collidables, layer.entities.player)
 
     -- Set the love.keypressed function to change back to menu state and to send signal to the Player object.
     function love.keypressed(key)
@@ -49,7 +54,7 @@ function game.enter()
             state.enter(menu)
         end
         if key == "space" or key == "up" then
-            layer.player:jump_pressed()
+            layer.entities.player:jump_pressed()
         end
     end
 end
@@ -64,7 +69,7 @@ function game.draw()
     local screen = { width = love.graphics.getWidth() / scale, height = love.graphics.getHeight() / scale }
 
     -- Translate world to put the player in the center
-    local player = map.layers["Sprites"].player
+    local player = map.layers["Sprites"].entities.player
     local tx = player.x - screen.width / 2
     local ty = player.y - screen.height / 2
 

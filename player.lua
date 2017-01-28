@@ -10,8 +10,7 @@ player = {
     acceleration = { x = 0, y = 0 },
     max_speed =    { x = 6, y = 6 },
     state = standing,
-    facing_right = true,
-    properties = { floating = false }
+    facing_right = true
 }
 
 function player:new(o)
