@@ -1,5 +1,7 @@
 require("movement")
 
+local anim8 = require '../libs/anim8/anim8'
+
 player = {
     x = 0,
     y = 0,
@@ -17,8 +19,21 @@ function player:new(o)
     return o
 end
 
+function player:init(spawn)
+    local stand_sprite = love.graphics.newImage("assets/trump_stand.png")
+    local walk_sprite = love.graphics.newImage("assets/trump_walk.png")
+    local stand_grid = anim8.newGrid(16, 16, stand_sprite:getWidth(), stand_sprite:getHeight())
+    local walk_grid = anim8.newGrid(16, 16, walk_sprite:getWidth(), walk_sprite:getHeight())
+    self.stand_animation = anim8.newAnimation(stand_grid('1-2', 1), 24)
+    self.walk_animation = anim8.newAnimation(walk_grid('1-4', 1), 12)
+    self.stand_sprite = stand_sprite
+    self.walk_sprite = walk_sprite
+    self.x      = spawn.x
+    self.y      = spawn.y
+end
+
 function player:update(dt)
-    -- Should the animation not use dt but frame count?
+    -- The animation does not use dt but frame count.
     self.stand_animation:update(1)
     self.walk_animation:update(1)
 

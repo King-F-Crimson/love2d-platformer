@@ -21,17 +21,7 @@ function game.enter()
 
     -- Create the player entity
     layer.player = player:new()
-
-    local stand_sprite = love.graphics.newImage("assets/trump_stand.png")
-    local walk_sprite = love.graphics.newImage("assets/trump_walk.png")
-    local stand_grid = anim8.newGrid(16, 16, stand_sprite:getWidth(), stand_sprite:getHeight())
-    local walk_grid = anim8.newGrid(16, 16, walk_sprite:getWidth(), walk_sprite:getHeight())
-    layer.player.stand_animation = anim8.newAnimation(stand_grid('1-2', 1), 24)
-    layer.player.walk_animation = anim8.newAnimation(walk_grid('1-4', 1), 12)
-    layer.player.stand_sprite = stand_sprite
-    layer.player.walk_sprite = walk_sprite
-    layer.player.x      = player_spawn.x
-    layer.player.y      = player_spawn.y
+    layer.player:init(player_spawn)
 
     -- Draw the player and a point
     layer.draw = function(self)
