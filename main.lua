@@ -25,9 +25,9 @@ function love.update(dt)
         love.event.push("quit")
     end
 
-    application.state.update(dt)
+    application.state:update(dt)
 end
 
 function love.draw()
-    application.state.draw()
+    application.state:draw()
 end

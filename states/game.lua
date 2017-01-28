@@ -6,13 +6,13 @@ require("player")
 
 game = {}
 
-function game.enter()
-    map = sti("maps/map_1-2.lua", { "bump" })
-    local layer = map:addCustomLayer("Sprites", 3)
+function game:enter()
+    self.map = sti("maps/map_1-2.lua", { "bump" })
+    local layer = self.map:addCustomLayer("Sprites", 3)
 
     -- Get player spawn object
     local player_spawn
-    for k, object in pairs(map.objects) do
+    for k, object in pairs(self.map.objects) do
         if object.name == "Player" then
             player_spawn = object
             break
@@ -37,16 +37,16 @@ function game.enter()
         end
     end
 
-    map:removeLayer("Spawn Points")
+    self.map:removeLayer("Spawn Points")
 
     -- bump.lua experiment
     world = bump.newWorld(16)
-    map:bump_init(world)
+    self.map:bump_init(world)
 
     world:add(layer.entities.player, layer.entities.player.x, layer.entities.player.y, 16, 16)
     layer.entities.player.world = world
-    -- Add the player collidable object to map collidables so it's drawn in map:bump_draw(world)
-    table.insert(map.bump_collidables, layer.entities.player)
+    -- Add the player collidable object to self.map collidables so it's drawn in self.map:bump_draw(world)
+    table.insert(self.map.bump_collidables, layer.entities.player)
 
     -- Set the love.keypressed function to change back to menu state and to send signal to the Player object.
     function love.keypressed(key)
@@ -59,17 +59,17 @@ function game.enter()
     end
 end
 
-function game.update(dt)
-    map:update(dt)
+function game:update(dt)
+    self.map:update(dt)
 end
 
-function game.draw()
+function game:draw()
     -- Scale world
     local scale = 2
     local screen = { width = love.graphics.getWidth() / scale, height = love.graphics.getHeight() / scale }
 
     -- Translate world to put the player in the center
-    local player = map.layers["Sprites"].entities.player
+    local player = self.map.layers["Sprites"].entities.player
     local tx = player.x - screen.width / 2
     local ty = player.y - screen.height / 2
 
@@ -77,6 +77,6 @@ function game.draw()
     love.graphics.scale(scale)
     love.graphics.translate(-tx, -ty)
 
-    map:draw()
-    map:bump_draw(world)
+    self.map:draw()
+    self.map:bump_draw(world)
 end
