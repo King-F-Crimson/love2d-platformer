@@ -1,4 +1,5 @@
 require("movement")
+require("animate")
 
 local anim8 = require '../libs/anim8/anim8'
 
@@ -28,6 +29,8 @@ function player:init(spawn)
     self.walk_animation = anim8.newAnimation(walk_grid('1-4', 1), 12)
     self.stand_sprite = stand_sprite
     self.walk_sprite = walk_sprite
+    self.jump_animation, self.jump_sprite = animate("assets/trump_jump.png", 12)
+    self.fall_animation, self.fall_sprite = animate("assets/trump_fall.png", 12)
     self.x      = spawn.x
     self.y      = spawn.y
 end
@@ -64,6 +67,12 @@ function player:draw()
     elseif self.state == walking then
         animation = self.walk_animation
         sprite = self.walk_sprite
+    elseif self.state == jumping then
+        animation = self.jump_animation
+        sprite = self.jump_sprite
+    elseif self.state == falling then
+        animation = self.fall_animation
+        sprite = self.fall_sprite
     end
 
     animation:draw(
