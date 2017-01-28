@@ -19,7 +19,7 @@ end
 
 function player:update(dt)
     -- Should the animation not use dt but frame count?
-    self.walk_animation:update(1)
+    self.stand_animation:update(1)
     self.walk_animation:update(1)
 
     local input = self:get_input()
