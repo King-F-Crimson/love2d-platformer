@@ -21,14 +21,8 @@ function player:new(o)
 end
 
 function player:init(spawn)
-    local stand_sprite = love.graphics.newImage("assets/trump_stand.png")
-    local walk_sprite = love.graphics.newImage("assets/trump_walk.png")
-    local stand_grid = anim8.newGrid(16, 16, stand_sprite:getWidth(), stand_sprite:getHeight())
-    local walk_grid = anim8.newGrid(16, 16, walk_sprite:getWidth(), walk_sprite:getHeight())
-    self.stand_animation = anim8.newAnimation(stand_grid('1-2', 1), 24)
-    self.walk_animation = anim8.newAnimation(walk_grid('1-4', 1), 12)
-    self.stand_sprite = stand_sprite
-    self.walk_sprite = walk_sprite
+    self.stand_animation, self.stand_sprite = animate("assets/trump_stand.png", 24)
+    self.walk_animation, self.walk_sprite = animate("assets/trump_walk.png", 12)
     self.jump_animation, self.jump_sprite = animate("assets/trump_jump.png", 12)
     self.fall_animation, self.fall_sprite = animate("assets/trump_fall.png", 12)
     self.x      = spawn.x
