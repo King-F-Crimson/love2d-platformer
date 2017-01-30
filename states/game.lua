@@ -16,7 +16,9 @@ function game:enter()
             self.world.player:jump_pressed()
         end
         if key == "rctrl" then
-            debug.debug()
+            for k,v in pairs( _G ) do
+               print( k .. " =&gt; ", v )
+            end
         end
     end
 end

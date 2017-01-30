@@ -5,11 +5,11 @@ entity = {
     h = 0,
     velocity =     { x = 0, y = 0 },
     acceleration = { x = 0, y = 0 },
-    max_speed =    { x = 0, y = 0 },
+    max_speed =    { x = 6, y = 6 },
     properties = {},
     facing_right = true,
     animation = {},
-    sprite = {}
+    sprite = {},
 }
 
 function entity:new(o)
@@ -20,16 +20,11 @@ function entity:new(o)
 end
 
 function entity:draw()
-	if facing_rigth then
+	if facing_right then
 		love.graphics.draw(self.sprite, self.x, self.y)
 	else
 		love.graphics.draw(self.sprite, self.x + 16, self.y, 0, -1, 1)
 	end
-end
-
-function entity:move(control)
-    self.state:move(self, control)
-    movement.update_spatial(self)
 end
 
 function entity:update_animations(dt)

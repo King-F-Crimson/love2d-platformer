@@ -22,6 +22,8 @@ function world:init()
 	self:init_bump_world()
 
 	self:spawn_entity(chili_monster:new())
+	self:spawn_entity(chili_monster:new())
+	self:spawn_entity(chili_monster:new())
 end
 
 function world:create_entities_layer()

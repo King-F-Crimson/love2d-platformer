@@ -11,9 +11,9 @@ player = entity:new({
 
 function player:init(spawn)
     self.animation[standing], self.sprite[standing] = animate("assets/trump_stand.png", 24)
-    self.animation[walking], self.sprite[walking] = animate("assets/trump_walk.png", 12)
-    self.animation[jumping], self.sprite[jumping] = animate("assets/trump_jump.png", 12)
-    self.animation[falling], self.sprite[falling] = animate("assets/trump_fall.png", 12)
+    self.animation[walking],  self.sprite[walking]  = animate("assets/trump_walk.png", 12)
+    self.animation[jumping],  self.sprite[jumping]  = animate("assets/trump_jump.png", 12)
+    self.animation[falling],  self.sprite[falling]  = animate("assets/trump_fall.png", 12)
     self.x      = spawn.x
     self.y      = spawn.y
 end
@@ -49,4 +49,9 @@ function player:update(dt)
 
     local control = self:get_control()
     self:move(control)
+end
+
+function player:move(control)
+    self.state.move(self, control)
+    movement.update_spatial(self)
 end
