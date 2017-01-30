@@ -101,14 +101,14 @@ function movement.update_spatial(entity)
         entity.velocity.y = -entity.max_speed.y
     end
     
-    entity.x, entity.y = world:move(entity, entity.x + entity.velocity.x, entity.y + entity.velocity.y)
+    entity.x, entity.y = entity.world:move(entity, entity.x + entity.velocity.x, entity.y + entity.velocity.y)
 end
 
 function movement.is_grounded(entity)
     local is_grounded = false
 
     -- Check collision for everything one pixel under the entity.
-    x, y, cols, len = world:check(entity, entity.x, entity.y + 1)
+    x, y, cols, len = entity.world:check(entity, entity.x, entity.y + 1)
 
     -- Check if the entity hits ground.
     for i = 1, len do
@@ -127,7 +127,7 @@ function movement.hits_ceiling(entity)
     local hits_ceiling = false
 
     -- Check collision for everything one pixel above the entity.
-    x, y, cols, len = world:check(entity, entity.x, entity.y - 1)
+    x, y, cols, len = entity.world:check(entity, entity.x, entity.y - 1)
 
     -- Check if the entity hits ceiling.
     for i = 1, len do

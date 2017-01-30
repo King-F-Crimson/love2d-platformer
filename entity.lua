@@ -7,4 +7,3 @@ entity = {
     state = standing,
     facing_right = true
 }
-
