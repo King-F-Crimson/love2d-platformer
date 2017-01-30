@@ -8,7 +8,6 @@ entity = {
     max_speed =    { x = 0, y = 0 },
     properties = {},
     facing_right = true,
-    states = {},
     animation = {},
     sprite = {}
 }
@@ -33,12 +32,9 @@ function entity:move(control)
     movement.update_spatial(self)
 end
 
-function entity:update(dt)
+function entity:update_animations(dt)
 	-- The animation does not use dt but frame count.
     for k, animation in pairs(self.animation) do
         animation:update(1)
     end
-
-    local control = self:get_control()
-    self:move(control)
 end

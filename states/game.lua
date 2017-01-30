@@ -15,6 +15,9 @@ function game:enter()
         if key == "space" or key == "up" then
             self.world.player:jump_pressed()
         end
+        if key == "rctrl" then
+            debug.debug()
+        end
     end
 end
 

@@ -43,3 +43,10 @@ function player:jump_pressed()
         self.ready_jump = true
     end
 end
+
+function player:update(dt)
+    self:update_animations(dt)
+
+    local control = self:get_control()
+    self:move(control)
+end

@@ -1,3 +1,4 @@
 function love.conf(t)
-    t.console = false
+    t.console = true
+    io.stdout:setvbuf("no")
 end

@@ -5,11 +5,11 @@ chili_monster = entity:new({
 	w = 16,
 	h = 16,
 	sprite = love.graphics.newImage("assets/Mexican_Chili_Monster.png"),
-	state = standing
+	state = falling
 })
 
 function chili_monster:get_control()
-	local control = {}
+	local control = { jump = false }
 
 	-- Move to the direction it's facing
 	if self.facing_right then
@@ -27,4 +27,13 @@ function chili_monster:get_control()
 	end
 
 	return control
+end
+
+function chili_monster:update(dt)
+    local control = self:get_control()
+    self:move(control)
+end
+
+function chili_monster:move(control)
+	
 end
