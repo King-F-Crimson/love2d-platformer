@@ -1,14 +1,14 @@
 require("entity")
 require("movement")
 
-chili_monster = entity:new({
-	x = 96,
-	y = 48,
+chili_monster = entity:new{
+	x = 0,
+	y = 0,
 	w = 16,
 	h = 16,
 	sprite = love.graphics.newImage("assets/Mexican_Chili_Monster.png"),
-	state = falling
-})
+	state = walking
+}
 
 function chili_monster:get_control()
 	local control = { jump = false }
@@ -37,6 +37,6 @@ function chili_monster:update(dt)
 end
 
 function chili_monster:move(control)
-    -- self.state.move(self, control)
+    self.state.move(self, control)
     movement.update_spatial(self)
 end

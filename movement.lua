@@ -47,8 +47,8 @@ end
 -- Jumping control
 function jumping.enter(entity)
     entity.velocity.y = -5
-    entity.jump_length = 60
-    entity.minimum_length = 45
+    entity.jump_length = 15
+    entity.minimum_length = 10
 
     return jumping
 end
@@ -159,7 +159,7 @@ function movement.hits_wall(entity)
         local other = cols[i].other
         local normal = cols[i].normal
         -- True if item hits solid object and collides from behind.
-        if other.properties.solid and normal.x == -wall_pos and normal.y == 0 then
+        if normal.x == -wall_pos and normal.y == 0 then
             hits_wall = true
         end
     end
