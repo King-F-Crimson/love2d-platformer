@@ -47,8 +47,8 @@ end
 -- Jumping control
 function jumping:enter(entity)
     entity.velocity.y = -5
-    self.jump_length = 15
-    self.minimum_length = 10
+    entity.jump_length = 15
+    entity.minimum_length = 10
 
     return self
 end
@@ -56,8 +56,8 @@ end
 function jumping:move(entity, input)
     movement.horizontal_move(entity, input)
     if not movement.hits_ceiling(entity) then
-        if ((input.jump or self.jump_length > self.minimum_length) and self.jump_length ~= 0) then
-            self.jump_length = self.jump_length - 1
+        if ((input.jump or entity.jump_length > entity.minimum_length) and entity.jump_length ~= 0) then
+            entity.jump_length = entity.jump_length - 1
         else
             entity.state = falling:enter(entity)
         end
@@ -140,6 +140,31 @@ function movement.hits_ceiling(entity)
     end
 
     return hits_ceiling
+end
+
+function movement.hits_wall(entity)
+    local hits_wall = false
+
+    -- Sets the wall location to the one in front of the entity.
+    local wall_pos = -1
+    if entity.facing_right then
+        wall_pos = 1
+    end
+
+    -- Check collision for everything one pixel in front of the entity.
+    x, y, cols, len = entity.world:check(entity, entity.x + wall_pos, entity.y)
+
+    -- Check if the entity hits wall.
+    for i = 1, len do
+        local other = cols[i].other
+        local normal = cols[i].normal
+        -- True if item hits solid object and collides from behind.
+        if other.properties.solid and normal.x == -wall_pos and normal.y == 0 then
+            hits_wall = true
+        end
+    end
+
+    return hits_wall
 end
 
 function movement.horizontal_move(entity, input)

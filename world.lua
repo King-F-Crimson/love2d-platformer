@@ -1,3 +1,6 @@
+require("entity")
+require("chili_monster")
+
 local sti = require "../libs/Simple-Tiled-Implementation/sti"
 local bump = require "../libs/bump_lua/bump"
 local anim8 = require '../libs/anim8/anim8'
@@ -17,6 +20,8 @@ function world:init()
 	self:create_player()
 	self.map:removeLayer("Spawn Points")
 	self:init_bump_world()
+
+	-- self:spawn_entity(chili_monster:new())
 end
 
 function world:create_entities_layer()
@@ -62,6 +67,14 @@ function world:init_bump_world()
 	self.player.world = self.bump_world
 	-- Add the player collidable object to self.map collidables so it's drawn in self.map:bump_draw(world).
 	table.insert(self.map.bump_collidables, self.player)
+end
+
+function world:spawn_entity(entity)
+	table.insert(self.entities_layer.entities, entity)
+	self.bump_world:add(entity, entity.x, entity.y, entity.w, entity.h)
+	table.insert(self.map.bump_collidables, entity)
+
+	entity.world = self.bump_world
 end
 
 function world:update(dt)

@@ -1,73 +1,35 @@
 require("movement")
 require("animate")
+require("entity")
 
 local anim8 = require '../libs/anim8/anim8'
 
-player = {
-    x = 0,
-    y = 0,
-    velocity =     { x = 0, y = 0 },
-    acceleration = { x = 0, y = 0 },
+player = entity:new({
     max_speed =    { x = 6, y = 6 },
     state = standing,
-    facing_right = true
-}
-
-function player:new(o)
-    o = o or {}
-    setmetatable(o, self)
-    self.__index = self
-    return o
-end
+})
 
 function player:init(spawn)
-    self.stand_animation, self.stand_sprite = animate("assets/trump_stand.png", 24)
-    self.walk_animation, self.walk_sprite = animate("assets/trump_walk.png", 12)
-    self.jump_animation, self.jump_sprite = animate("assets/trump_jump.png", 12)
-    self.fall_animation, self.fall_sprite = animate("assets/trump_fall.png", 12)
+    self.animation[standing], self.sprite[standing] = animate("assets/trump_stand.png", 24)
+    self.animation[walking], self.sprite[walking] = animate("assets/trump_walk.png", 12)
+    self.animation[jumping], self.sprite[jumping] = animate("assets/trump_jump.png", 12)
+    self.animation[falling], self.sprite[falling] = animate("assets/trump_fall.png", 12)
     self.x      = spawn.x
     self.y      = spawn.y
 end
 
-function player:update(dt)
-    -- The animation does not use dt but frame count.
-    self.stand_animation:update(1)
-    self.walk_animation:update(1)
+function player:get_control()
+    local control = { left = false, right = false, jump = false }
+    control.left  = love.keyboard.isDown("left")  or love.keyboard.isDown("a")
+    control.right = love.keyboard.isDown("right") or love.keyboard.isDown("s")
+    control.jump  = love.keyboard.isDown("up")    or love.keyboard.isDown("space")
 
-    local input = self:get_input()
-    self:move(input)
-end
-
-function player:get_input()
-    local input = { left = false, right = false, jump = false }
-    input.left  = love.keyboard.isDown("left")  or love.keyboard.isDown("a")
-    input.right = love.keyboard.isDown("right") or love.keyboard.isDown("s")
-    input.jump  = love.keyboard.isDown("up")    or love.keyboard.isDown("space")
-
-    return input
-end
-
-function player:move(input)
-    self.state:move(self, input)
-    movement.update_spatial(self)
+    return control
 end
 
 function player:draw()
-    local animation = nil
-    local sprite = nil
-    if self.state == standing then
-        animation = self.stand_animation
-        sprite = self.stand_sprite
-    elseif self.state == walking then
-        animation = self.walk_animation
-        sprite = self.walk_sprite
-    elseif self.state == jumping then
-        animation = self.jump_animation
-        sprite = self.jump_sprite
-    elseif self.state == falling then
-        animation = self.fall_animation
-        sprite = self.fall_sprite
-    end
+    local animation = self.animation[self.state]
+    local sprite = self.sprite[self.state]
 
     if self.facing_right then
         animation:draw(sprite, self.x, self.y, 0, 1, 1)
