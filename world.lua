@@ -21,8 +21,13 @@ function world:init()
 	self.map:removeLayer("Spawn Points")
 	self:init_bump_world()
 
-	self:spawn_entity(chili_monster:new())
-	self:spawn_entity(chili_monster:new{x = 32, y = 128, state = standing})
+	self:spawn_entity(chili_monster:new({velocity = {x = 0, y = 2}}))
+	self:spawn_entity(chili_monster:new({velocity = {x = 0, y = 2}}))
+	self:spawn_entity(chili_monster:new({velocity = {x = 0, y = 2}}))
+	self:spawn_entity(chili_monster:new({velocity = {x = 0, y = 2}}))
+	self:spawn_entity(chili_monster:new({velocity = {x = 0, y = 2}}))
+	self:spawn_entity(chili_monster:new({velocity = {x = 0, y = 2}}))
+	self:spawn_entity(chili_monster:new({velocity = {x = 0, y = 2}}))
 end
 
 function world:create_entities_layer()
@@ -80,6 +85,8 @@ end
 
 function world:update(dt)
 	self.map:update(dt)
+
+	print(entity.velocity.y)
 end
 
 function world:draw()

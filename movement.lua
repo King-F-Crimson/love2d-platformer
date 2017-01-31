@@ -1,7 +1,7 @@
-standing = {}
-walking = {}
-jumping = {}
-falling = {}
+standing = { name = "standing" }
+walking  = { name = "walking"  }
+jumping  = { name = "jumping"  }
+falling  = { name = "falling"  }
 movement = {}
 
 -- Standing control
