@@ -10,6 +10,13 @@ chili_monster = entity:new{
 	state = walking
 }
 
+function chili_monster:init()
+	self.velocity = { x = 0, y = 0 }
+	self.acceleration = { x = 0, y = 0 }
+	self.sprite:setFilter("nearest")
+	self.facing_right = true
+end
+
 function chili_monster:get_control()
 	local control = { jump = false }
 

@@ -4,24 +4,10 @@ require("entity")
 
 local anim8 = require '../libs/anim8/anim8'
 
--- player = entity:new({
---     max_speed =    { x = 6, y = 6 },
---     state = standing,
--- })
-player = {
-    x = 0,
-    y = 0,
-    w = 0,
-    h = 0,
-    velocity =     { x = 0, y = 0 },
-    acceleration = { x = 0, y = 0 },
+player = entity:new({
     max_speed =    { x = 6, y = 6 },
-    properties = {},
-    facing_right = true,
-    animation = {},
-    sprite = {},
     state = standing,
-}
+})
 
 function player:new(o)
     o = o or {}
@@ -37,6 +23,8 @@ function player:init(spawn)
     self.animation[falling],  self.sprite[falling]  = animate("assets/trump_fall.png", 12)
     self.x      = spawn.x
     self.y      = spawn.y
+    self.velocity = { x = 0, y = 0 }
+    self.acceleration = { x = 0, y = 0 }
 end
 
 function player:get_control()

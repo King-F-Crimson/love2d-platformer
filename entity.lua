@@ -20,11 +20,15 @@ function entity:new(o)
 end
 
 function entity:draw()
-	if facing_right then
+	if self.facing_right then
 		love.graphics.draw(self.sprite, self.x, self.y)
 	else
 		love.graphics.draw(self.sprite, self.x + 16, self.y, 0, -1, 1)
 	end
+end
+
+function entity:update()
+
 end
 
 function entity:update_animations(dt)

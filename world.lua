@@ -21,13 +21,7 @@ function world:init()
 	self.map:removeLayer("Spawn Points")
 	self:init_bump_world()
 
-	self:spawn_entity(chili_monster:new({velocity = {x = 0, y = 2}}))
-	self:spawn_entity(chili_monster:new({velocity = {x = 0, y = 2}}))
-	self:spawn_entity(chili_monster:new({velocity = {x = 0, y = 2}}))
-	self:spawn_entity(chili_monster:new({velocity = {x = 0, y = 2}}))
-	self:spawn_entity(chili_monster:new({velocity = {x = 0, y = 2}}))
-	self:spawn_entity(chili_monster:new({velocity = {x = 0, y = 2}}))
-	self:spawn_entity(chili_monster:new({velocity = {x = 0, y = 2}}))
+	self:spawn_entity(chili_monster:new({velocity = {x = 0, y = 0}}))
 end
 
 function world:create_entities_layer()
@@ -81,12 +75,11 @@ function world:spawn_entity(entity)
 	table.insert(self.map.bump_collidables, entity)
 
 	entity.world = self.bump_world
+	entity:init()
 end
 
 function world:update(dt)
 	self.map:update(dt)
-
-	print(entity.velocity.y)
 end
 
 function world:draw()
