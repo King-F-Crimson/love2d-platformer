@@ -42,6 +42,7 @@ function player:draw()
     local animation = self.animation[self.state]
     local sprite = self.sprite[self.state]
 
+    -- Blinks for four frames when invincible.
     if self.invincibility_timer % 8 < 4 then
         if self.facing_right then
             animation:draw(sprite, self.x, self.y, 0, 1, 1)
@@ -61,7 +62,6 @@ function player:update(dt)
     entity.update_animations(self, dt)
 
     if self.invincibility_timer > 0 then
-        print(self.invincibility_timer)
         self.invincibility_timer = self.invincibility_timer - 1
     end
 
@@ -83,7 +83,5 @@ function player:on_collision(cols, len)
 end
 
 function player:get_hurt()
-    print("Damaged!")
-
     self.invincibility_timer = 60
 end
