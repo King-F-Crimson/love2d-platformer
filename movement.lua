@@ -20,6 +20,8 @@ function standing.move(entity, input)
     if entity.ready_jump then
         entity.ready_jump = false
         entity.state = jumping.enter(entity)
+    elseif not movement.is_grounded(entity) then
+        entity.state = falling.enter(entity)
     end
 end
 
