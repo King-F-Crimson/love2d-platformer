@@ -42,10 +42,12 @@ function player:draw()
     local animation = self.animation[self.state]
     local sprite = self.sprite[self.state]
 
-    if self.facing_right then
-        animation:draw(sprite, self.x, self.y, 0, 1, 1)
-    else
-        animation:draw(sprite, self.x + 16, self.y, 0, -1, 1)
+    if self.invincibility_timer % 8 < 4 then
+        if self.facing_right then
+            animation:draw(sprite, self.x, self.y, 0, 1, 1)
+        else
+            animation:draw(sprite, self.x + 16, self.y, 0, -1, 1)
+        end
     end
 end
 
