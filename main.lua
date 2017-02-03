@@ -1,6 +1,6 @@
 require("run")
 require("state")
-require("states/menu")
+require("menu")
 
 application = {}
 application.assets = {}

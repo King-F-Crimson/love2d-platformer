@@ -1,4 +1,4 @@
-require("states/game")
+require("game")
 
 menu = {}
 
