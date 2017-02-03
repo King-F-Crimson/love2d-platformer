@@ -3,13 +3,15 @@ require("game")
 menu = {}
 
 function menu:enter()
-    self.items = { "Start", "Exit" }
-    self.actions = {}
-    self.pointer = 1
-    self.item_count = table.getn(self.items)
+    self.main_menu = {
+        items = { "Start", "Exit" },
+        actions = {
+            function() state.enter(game) end,
+            function() love.event.push("quit") end
+        }
+    }
 
-    self.actions[1] = function() state.enter(game) end
-    self.actions[2] = function() love.event.push("quit") end
+    self:set_submenu(self.main_menu)
 
     -- Move the selected item with keys.
     function love.keypressed(key)
@@ -31,6 +33,13 @@ function menu:enter()
             self.actions[self.pointer]()
         end
     end
+end
+
+function menu:set_submenu(submenu)
+    self.items = submenu.items
+    self.actions = submenu.actions
+    self.pointer = 1
+    self.item_count = #submenu.items
 end
 
 function menu:update()
