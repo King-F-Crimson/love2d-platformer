@@ -38,6 +38,10 @@ function entity:update_animations(dt)
     end
 end
 
+function entity:on_collision(cols, len)
+
+end
+
 function entity.filter(item, other)
     if other.properties.solid then
         return 'slide'

@@ -28,7 +28,7 @@ function exit_door:check_player_exit()
     local x, y, cols, len = self.world:check(self, self.x, self.y)
 
     for i = 1, len do
-        if cols[i].other.properties.isPlayer then
+        if cols[i].other.properties.is_player then
             if love.keyboard.isDown("up") then
                 state.enter(menu)
             end

@@ -7,7 +7,8 @@ chili_monster = entity:new{
 	w = 16,
 	h = 16,
 	sprite = love.graphics.newImage("assets/Mexican_Chili_Monster.png"),
-	state = walking
+	state = walking,
+	properties = {is_enemy = true}
 }
 
 function chili_monster:init()

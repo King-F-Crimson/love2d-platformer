@@ -7,7 +7,8 @@ local anim8 = require '../libs/anim8/anim8'
 player = entity:new({
     max_speed =    { x = 6, y = 6 },
     state = standing,
-    properties = {isPlayer = true},
+    properties = {is_player = true},
+    invincibility_timer = 0,
 })
 
 function player:new(o)
@@ -57,6 +58,11 @@ end
 function player:update(dt)
     entity.update_animations(self, dt)
 
+    if self.invincibility_timer > 0 then
+        print(self.invincibility_timer)
+        self.invincibility_timer = self.invincibility_timer - 1
+    end
+
     local control = self:get_control()
     self:move(control)
 end
@@ -64,4 +70,18 @@ end
 function player:move(control)
     self.state.move(self, control)
     movement.update_spatial(self)
+end
+
+function player:on_collision(cols, len)
+    for i = 1, len do
+        if cols[i].other.properties.is_enemy and self.invincibility_timer == 0 then
+            self:get_hurt()
+        end
+    end
+end
+
+function player:get_hurt()
+    print("Damaged!")
+
+    self.invincibility_timer = 60
 end

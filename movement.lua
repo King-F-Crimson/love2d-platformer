@@ -101,7 +101,9 @@ function movement.update_spatial(entity)
         entity.velocity.y = -entity.max_speed.y
     end
     
-    entity.x, entity.y = entity.world:move(entity, entity.x + entity.velocity.x, entity.y + entity.velocity.y, entity.filter)
+    local cols, len
+    entity.x, entity.y, cols, len = entity.world:move(entity, entity.x + entity.velocity.x, entity.y + entity.velocity.y, entity.filter)
+    entity:on_collision(cols, len)
 end
 
 function movement.is_grounded(entity)
