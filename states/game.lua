@@ -15,10 +15,8 @@ function game:enter()
         if key == "space" or key == "up" then
             self.world.player:jump_pressed()
         end
-        if key == "rctrl" then
-            for k,v in pairs( _G ) do
-               print( k .. " =&gt; ", v )
-            end
+        if key == "lctrl" or key == "rctrl" then
+            self.world.draw_hitbox = not self.world.draw_hitbox
         end
     end
 end

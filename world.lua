@@ -6,7 +6,9 @@ local sti = require "../libs/Simple-Tiled-Implementation/sti"
 local bump = require "../libs/bump_lua/bump"
 local anim8 = require '../libs/anim8/anim8'
 
-world = {}
+world = {
+    draw_hitbox = true
+}
 
 function world:new(o)
     o = o or {}
@@ -119,5 +121,7 @@ function world:draw()
     love.graphics.translate(-tx, -ty)
 
     self.map:draw()
-    self.map:bump_draw(self.bump_world)
+    if self.draw_hitbox then
+        self.map:bump_draw(self.bump_world)
+    end
 end
