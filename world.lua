@@ -17,8 +17,8 @@ function world:new(o)
     return o
 end
 
-function world:init()
-    self.map = sti("maps/map_1-2.lua", { "bump" })
+function world:init(map)
+    self.map = sti(map, { "bump" })
     self:create_layer("background_entities", 2)
     self:create_layer("entities", 3)
     self:create_player()

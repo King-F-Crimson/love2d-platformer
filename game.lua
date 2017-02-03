@@ -3,9 +3,9 @@ require("world")
 
 game = {}
 
-function game:enter()
+function game:enter(map)
     self.world = world:new()
-    self.world:init()
+    self.world:init(map)
 
     -- Set the love.keypressed function to change back to menu state and to send signal to the Player object.
     function love.keypressed(key)
