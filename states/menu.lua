@@ -13,14 +13,14 @@ function menu:enter()
 
     -- Move the selected item with keys.
     function love.keypressed(key)
-        if key == "w" then
+        if key == "w" or key == "up" then
             if self.pointer == 1 then
                 self.pointer = self.item_count    -- If self.pointer is at first item, set it to the last item.
             else
                 self.pointer = self.pointer - 1
             end
         end
-        if key == "r" then
+        if key == "r" or key == "down" then
             if self.pointer == self.item_count then
                 self.pointer = 1             -- If self.pointer is at last item, set it to the first item.
             else

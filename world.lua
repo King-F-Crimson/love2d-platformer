@@ -20,10 +20,13 @@ function world:init()
     self:create_layer("background_entities", 2)
     self:create_layer("entities", 3)
     self:create_player()
-    self:create_exit_door()
     self:init_bump_world()
 
-    self:spawn_entity(chili_monster:new({velocity = {x = 0, y = 0}}))
+    self:spawn_entity(chili_monster:new{velocity = {x = 0, y = 0}}, self.entities_layer)
+
+    local door_spawn = self:find_object("Exit_Door")
+    self:spawn_entity(exit_door:new({x = door_spawn.x, y = door_spawn.y, w = door_spawn.width, h = door_spawn.height}),
+        self.background_entities_layer)
 end
 
 function world:create_layer(name, level)
@@ -80,6 +83,7 @@ end
 function world:init_bump_world()
     self.bump_world = bump.newWorld(16)
     self.map:bump_init(self.bump_world)
+    -- When the entities are added to the bump world should be changed.
     -- Add the player object to the world.
     self.bump_world:add(self.player, self.player.x, self.player.y, 16, 16)
     self.player.world = self.bump_world
@@ -87,8 +91,8 @@ function world:init_bump_world()
     table.insert(self.map.bump_collidables, self.player)
 end
 
-function world:spawn_entity(entity)
-    table.insert(self.entities_layer.entities, entity)
+function world:spawn_entity(entity, layer)
+    table.insert(layer.entities, entity)
     self.bump_world:add(entity, entity.x, entity.y, entity.w, entity.h)
     table.insert(self.map.bump_collidables, entity)
 

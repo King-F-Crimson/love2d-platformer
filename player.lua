@@ -7,6 +7,7 @@ local anim8 = require '../libs/anim8/anim8'
 player = entity:new({
     max_speed =    { x = 6, y = 6 },
     state = standing,
+    properties = {isPlayer = true},
 })
 
 function player:new(o)

@@ -1,6 +1,8 @@
+require("state")
 
-
-exit_door = {}
+exit_door = {
+    properties = {}
+}
 
 function exit_door:new(o)
     o = o or {}
@@ -9,16 +11,27 @@ function exit_door:new(o)
     return o
 end
 
-function exit_door:init(door_spawn)
-    self.x, self.y = door_spawn.x, door_spawn.y
+function exit_door:init()
     self.sprite = love.graphics.newImage("assets/Exit_Door.png")
     self.sprite:setFilter("nearest")
 end
 
 function exit_door:update()
-
+    self:check_player_exit()
 end
 
 function exit_door:draw()
     love.graphics.draw(self.sprite, self.x, self.y)
+end
+
+function exit_door:check_player_exit()
+    local x, y, cols, len = self.world:check(self, self.x, self.y)
+
+    for i = 1, len do
+        if cols[i].other.properties.isPlayer then
+            if love.keyboard.isDown("up") then
+                state.enter(menu)
+            end
+        end
+    end
 end
