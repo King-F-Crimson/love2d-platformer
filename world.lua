@@ -17,7 +17,8 @@ end
 
 function world:init()
     self.map = sti("maps/map_1-2.lua", { "bump" })
-    self:create_entities_layer()
+    self:create_layer("background_entities", 2)
+    self:create_layer("entities", 3)
     self:create_player()
     self:create_exit_door()
     self:init_bump_world()
@@ -25,18 +26,20 @@ function world:init()
     self:spawn_entity(chili_monster:new({velocity = {x = 0, y = 0}}))
 end
 
-function world:create_entities_layer()
-    self.entities_layer = self.map:addCustomLayer("Entities", 3)
-    self.entities_layer.entities = {}
+function world:create_layer(name, level)
+    local layer_name = name .. "_layer"
+    self[layer_name] = self.map:addCustomLayer(name, level)
+    local layer = self[layer_name]
+    layer.entities = {}
 
     -- Create method to draw and update every entities in the layer.
-    function self.entities_layer:draw()
+    function layer:draw()
         for k, entity in pairs(self.entities) do
             entity:draw()
         end
     end
 
-    function self.entities_layer:update(dt)
+    function layer:update(dt)
         for k, entity in pairs(self.entities) do
             entity:update(dt)
         end
@@ -68,10 +71,10 @@ end
 function world:create_exit_door()
     local door_spawn = self:find_object("Exit_Door")
 
-    self.entities_layer.entities.exit_door = exit_door:new()
-    self.entities_layer.entities.exit_door:init(door_spawn)
+    self.background_entities_layer.entities.exit_door = exit_door:new()
+    self.background_entities_layer.entities.exit_door:init(door_spawn)
 
-    self.exit_door = self.entities_layer.entities.exit_door
+    self.exit_door = self.background_entities_layer.entities.exit_door
 end
 
 function world:init_bump_world()

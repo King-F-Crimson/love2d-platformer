@@ -29,7 +29,7 @@
 2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2
 </data>
  </layer>
- <objectgroup name="Spawn Points">
+ <objectgroup name="Spawn Points" opacity="0">
   <object id="11" name="Player" x="16" y="112" width="16" height="16"/>
   <object id="17" name="Exit_Door" x="64" y="192" width="32" height="48"/>
  </objectgroup>
