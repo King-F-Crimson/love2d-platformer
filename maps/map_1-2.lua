@@ -1,14 +1,14 @@
 return {
   version = "1.1",
   luaversion = "5.1",
-  tiledversion = "0.18.0",
+  tiledversion = "0.18.1",
   orientation = "orthogonal",
   renderorder = "right-down",
   width = 24,
   height = 16,
   tilewidth = 16,
   tileheight = 16,
-  nextobjectid = 15,
+  nextobjectid = 22,
   properties = {},
   tilesets = {
     {
@@ -81,9 +81,7 @@ return {
       offsetx = 0,
       offsety = 0,
       draworder = "topdown",
-      properties = {
-        ["collidable"] = true
-      },
+      properties = {},
       objects = {
         {
           id = 11,
@@ -94,6 +92,19 @@ return {
           y = 112,
           width = 16,
           height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 17,
+          name = "Exit_Door",
+          type = "",
+          shape = "rectangle",
+          x = 64,
+          y = 192,
+          width = 32,
+          height = 48,
           rotation = 0,
           visible = true,
           properties = {}
