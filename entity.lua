@@ -37,3 +37,11 @@ function entity:update_animations(dt)
         animation:update(1)
     end
 end
+
+function entity.filter(item, other)
+    if other.properties.solid then
+        return 'slide'
+    else
+        return 'cross'
+    end
+end

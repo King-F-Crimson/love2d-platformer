@@ -101,14 +101,14 @@ function movement.update_spatial(entity)
         entity.velocity.y = -entity.max_speed.y
     end
     
-    entity.x, entity.y = entity.world:move(entity, entity.x + entity.velocity.x, entity.y + entity.velocity.y)
+    entity.x, entity.y = entity.world:move(entity, entity.x + entity.velocity.x, entity.y + entity.velocity.y, entity.filter)
 end
 
 function movement.is_grounded(entity)
     local is_grounded = false
 
     -- Check collision for everything one pixel under the entity.
-    local x, y, cols, len = entity.world:check(entity, entity.x, entity.y + 1)
+    local x, y, cols, len = entity.world:check(entity, entity.x, entity.y + 1, entity.filter)
 
     -- Check if the entity hits ground.
     for i = 1, len do
@@ -127,7 +127,7 @@ function movement.hits_ceiling(entity)
     local hits_ceiling = false
 
     -- Check collision for everything one pixel above the entity.
-    local x, y, cols, len = entity.world:check(entity, entity.x, entity.y - 1)
+    local x, y, cols, len = entity.world:check(entity, entity.x, entity.y - 1, entity.filter)
 
     -- Check if the entity hits ceiling.
     for i = 1, len do
@@ -152,14 +152,14 @@ function movement.hits_wall(entity)
     end
 
     -- Check collision for everything one pixel in front of the entity.
-    local x, y, cols, len = entity.world:check(entity, entity.x + wall_pos, entity.y)
+    local x, y, cols, len = entity.world:check(entity, entity.x + wall_pos, entity.y, entity.filter)
 
     -- Check if the entity hits wall.
     for i = 1, len do
         local other = cols[i].other
         local normal = cols[i].normal
         -- True if item hits solid object and collides from behind.
-        if normal.x == -wall_pos and normal.y == 0 then
+        if other.properties.solid and normal.x == -wall_pos and normal.y == 0 then
             hits_wall = true
         end
     end
