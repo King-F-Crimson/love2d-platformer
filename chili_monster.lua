@@ -10,11 +10,11 @@ chili_monster = entity:new{
 	state = walking,
 	properties = {is_enemy = true}
 }
+chili_monster.sprite:setFilter("nearest")
 
 function chili_monster:init()
 	self.velocity = { x = 0, y = 0 }
 	self.acceleration = { x = 0, y = 0 }
-	self.sprite:setFilter("nearest")
 	self.facing_right = true
 end
 

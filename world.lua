@@ -71,6 +71,7 @@ function world:create_player()
     self.entities_layer.entities.player:init(player_spawn)
 
     self.player = self.entities_layer.entities.player
+    self.player.world = self
 end
 
 function world:init_bump_world()
@@ -79,7 +80,7 @@ function world:init_bump_world()
     -- When the entities are added to the bump world should be changed.
     -- Add the player object to the world.
     self.bump_world:add(self.player, self.player.x+4, self.player.y, 8, 14)
-    self.player.world = self.bump_world
+    self.player.bump_world = self.bump_world
     -- Add the player collidable object to self.map collidables so it's drawn in self.map:bump_draw(world).
     table.insert(self.map.bump_collidables, self.player)
 end
@@ -89,7 +90,8 @@ function world:spawn_entity(entity, layer)
     self.bump_world:add(entity, entity.x, entity.y, entity.w, entity.h)
     table.insert(self.map.bump_collidables, entity)
 
-    entity.world = self.bump_world
+    entity.world = self
+    entity.bump_world = self.bump_world
     entity:init()
 end
 

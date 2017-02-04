@@ -1,6 +1,7 @@
 require("movement")
 require("animate")
 require("entity")
+require("grenade_launcher")
 
 local anim8 = require '../libs/anim8/anim8'
 
@@ -27,13 +28,18 @@ function player:init(spawn)
     self.y      = spawn.y
     self.velocity = { x = 0, y = 0 }
     self.acceleration = { x = 0, y = 0 }
+
+    self.gun = grenade_launcher:new()
+    self.gun:init()
+    self.gun.wielder = self
 end
 
 function player:get_control()
-    local control = { left = false, right = false, jump = false }
+    local control = { left = false, right = false, jump = false, fire = false }
     control.left  = love.keyboard.isDown("left")  or love.keyboard.isDown("a")
     control.right = love.keyboard.isDown("right") or love.keyboard.isDown("s")
     control.jump  = love.keyboard.isDown("up")    or love.keyboard.isDown("space")
+    control.fire  = love.keyboard.isDown("x")
 
     return control
 end
@@ -46,8 +52,10 @@ function player:draw()
     if self.invincibility_timer % 8 < 4 then
         if self.facing_right then
             animation:draw(sprite, self.x - 4, self.y - 2, 0, 1, 1)
+            self.gun:draw()
         else
             animation:draw(sprite, self.x + 12, self.y - 2, 0, -1, 1)
+            self.gun:draw()
         end
     end
 end
@@ -67,6 +75,12 @@ function player:update(dt)
 
     local control = self:get_control()
     self:move(control)
+
+    self.gun:update(dt)
+
+    if control.fire and self.gun ~= nil then
+        self.gun:fire()
+    end
 end
 
 function player:move(control)
