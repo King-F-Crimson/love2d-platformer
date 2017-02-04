@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="24" height="16" tilewidth="16" tileheight="16" nextobjectid="15">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="24" height="16" tilewidth="16" tileheight="16" nextobjectid="16">
  <tileset firstgid="1" name="outdoor" tilewidth="16" tileheight="16" tilecount="64" columns="8">
   <image source="../assets/outdoor_tiles.png" trans="ffffff" width="128" height="128"/>
   <tile id="0">
@@ -29,10 +29,11 @@
 1,1,1,1,1,1,1,1,1,1,1,1,3,3,3,3,3,3,3,3,3,3,3,3
 </data>
  </layer>
- <objectgroup name="Spawn Points">
+ <objectgroup name="Spawn Points" opacity="0">
   <properties>
-   <property name="collidable" type="bool" value="true"/>
+   <property name="collidable" type="bool" value="false"/>
   </properties>
   <object id="11" name="Player" x="320" y="80" width="16" height="16"/>
+  <object id="15" name="Exit_Door" x="48" y="96" width="32" height="48"/>
  </objectgroup>
 </map>

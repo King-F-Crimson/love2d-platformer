@@ -1,14 +1,14 @@
 return {
   version = "1.1",
   luaversion = "5.1",
-  tiledversion = "0.18.0",
+  tiledversion = "0.18.1",
   orientation = "orthogonal",
   renderorder = "right-down",
   width = 24,
   height = 16,
   tilewidth = 16,
   tileheight = 16,
-  nextobjectid = 15,
+  nextobjectid = 16,
   properties = {},
   tilesets = {
     {
@@ -77,12 +77,12 @@ return {
       type = "objectgroup",
       name = "Spawn Points",
       visible = true,
-      opacity = 1,
+      opacity = 0,
       offsetx = 0,
       offsety = 0,
       draworder = "topdown",
       properties = {
-        ["collidable"] = true
+        ["collidable"] = false
       },
       objects = {
         {
@@ -94,6 +94,19 @@ return {
           y = 80,
           width = 16,
           height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 15,
+          name = "Exit_Door",
+          type = "",
+          shape = "rectangle",
+          x = 48,
+          y = 96,
+          width = 32,
+          height = 48,
           rotation = 0,
           visible = true,
           properties = {}
