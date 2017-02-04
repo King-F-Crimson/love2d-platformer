@@ -73,15 +73,6 @@ function world:create_player()
     self.player = self.entities_layer.entities.player
 end
 
-function world:create_exit_door()
-    local door_spawn = self:find_object("Exit_Door")
-
-    self.background_entities_layer.entities.exit_door = exit_door:new()
-    self.background_entities_layer.entities.exit_door:init(door_spawn)
-
-    self.exit_door = self.background_entities_layer.entities.exit_door
-end
-
 function world:init_bump_world()
     self.bump_world = bump.newWorld(16)
     self.map:bump_init(self.bump_world)
