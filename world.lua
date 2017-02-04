@@ -78,7 +78,7 @@ function world:init_bump_world()
     self.map:bump_init(self.bump_world)
     -- When the entities are added to the bump world should be changed.
     -- Add the player object to the world.
-    self.bump_world:add(self.player, self.player.x, self.player.y, 16, 16)
+    self.bump_world:add(self.player, self.player.x+4, self.player.y, 8, 14)
     self.player.world = self.bump_world
     -- Add the player collidable object to self.map collidables so it's drawn in self.map:bump_draw(world).
     table.insert(self.map.bump_collidables, self.player)

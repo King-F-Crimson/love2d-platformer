@@ -45,9 +45,9 @@ function player:draw()
     -- Blinks for four frames when invincible.
     if self.invincibility_timer % 8 < 4 then
         if self.facing_right then
-            animation:draw(sprite, self.x, self.y, 0, 1, 1)
+            animation:draw(sprite, self.x - 4, self.y - 2, 0, 1, 1)
         else
-            animation:draw(sprite, self.x + 16, self.y, 0, -1, 1)
+            animation:draw(sprite, self.x + 12, self.y - 2, 0, -1, 1)
         end
     end
 end
