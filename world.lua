@@ -24,7 +24,7 @@ function world:init(map)
     self:create_player()
     self:init_bump_world()
 
-    self:spawn_entity(chili_monster:new{velocity = {x = 0, y = 0}}, self.entities_layer)
+    self:spawn_entity(chili_monster:new{x = 16, velocity = {x = 0, y = 0}}, self.entities_layer)
 
     local door_spawn = self:find_object("Exit_Door")
     self:spawn_entity(exit_door:new({x = door_spawn.x, y = door_spawn.y, w = door_spawn.width, h = door_spawn.height}),

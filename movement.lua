@@ -118,8 +118,9 @@ function movement.is_grounded(entity)
     for i = 1, len do
         local other = cols[i].other
         local normal = cols[i].normal
+        local touch = cols[i].touch
         -- True if item hits solid object and collides from top.
-        if other.properties.solid and normal.x == 0 and normal.y == -1 then
+        if other.properties.solid and normal.x == 0 and normal.y == -1 and touch.y == entity.y then
             is_grounded = true
         end
     end
@@ -137,8 +138,9 @@ function movement.hits_ceiling(entity)
     for i = 1, len do
         local other = cols[i].other
         local normal = cols[i].normal
+        local touch = cols[i].touch
         -- True if item hits solid object and collides from bottom.
-        if other.properties.solid and normal.x == 0 and normal.y == 1 then
+        if other.properties.solid and normal.x == 0 and normal.y == 1 and touch.y == entity.y then
             hits_ceiling = true
         end
     end
@@ -162,8 +164,9 @@ function movement.hits_wall(entity)
     for i = 1, len do
         local other = cols[i].other
         local normal = cols[i].normal
+        local touch = cols[i].touch
         -- True if item hits solid object and collides from behind.
-        if other.properties.solid and normal.x == -wall_pos and normal.y == 0 then
+        if other.properties.solid and normal.x == -wall_pos and normal.y == 0 and touch.x == entity.x then
             hits_wall = true
         end
     end
