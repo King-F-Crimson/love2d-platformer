@@ -64,6 +64,8 @@ function grenade:on_collision(cols, len)
             if cols[i].normal.y ~= 0 then
                 self.velocity.y = math.sign(cols[i].normal.y) * math.abs(self.velocity.y)
             end
+        elseif cols[i].other.properties.is_enemy then
+            self:explode()
         end
     end
 end

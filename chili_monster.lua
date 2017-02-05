@@ -48,3 +48,11 @@ function chili_monster:move(control)
     self.state.move(self, control)
     movement.update_spatial(self)
 end
+
+function chili_monster:on_collision(cols, len)
+	for i = 1, len do
+		if cols[i].other.properties.is_explosion then
+			self.world:delete_entity(self)
+		end
+	end
+end
