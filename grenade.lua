@@ -19,11 +19,11 @@ function grenade:new(o)
     return o
 end
 
-function grenade:init(x, y, world, facing_right)
+function grenade:init(x, y, facing_right, world)
     self.fuse = 120
     -- Check to prevent init from world setting it to nil.
-    if x ~= nil and y ~= nil and world ~= nil and facing_right ~= nil then
-        self.x, self.y, self.world, self.facing_right = x, y, world, facing_right
+    if x ~= nil and y ~= nil and facing_right ~= nil and world ~= nil then
+        self.x, self.y, self.facing_right, self.world = x, y, facing_right, world
     end
 
     self.velocity = { x = 4, y = -2 }
@@ -35,7 +35,7 @@ function grenade:init(x, y, world, facing_right)
 end
 
 function grenade:update(dt)
-    self:move()
+    --self:move()
     self:apply_friction()
 
     if self.fuse > 0 then
