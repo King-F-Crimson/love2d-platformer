@@ -38,7 +38,7 @@ function player:get_control()
     local control = { left = false, right = false, jump = false, fire = false }
     control.left  = love.keyboard.isDown("left")  or love.keyboard.isDown("a")
     control.right = love.keyboard.isDown("right") or love.keyboard.isDown("s")
-    control.jump  = love.keyboard.isDown("up")    or love.keyboard.isDown("space")
+    control.jump  = love.keyboard.isDown("up")    or love.keyboard.isDown("space") or love.keyboard.isDown("z")
     control.fire  = love.keyboard.isDown("x")
 
     return control

@@ -12,7 +12,8 @@ function game:enter(map)
         if key == "p" then
             state.enter(menu)
         end
-        if key == "space" or key == "up" then
+        -- Shorthop can be added by adding the button here without adding it in player:get_control().
+        if key == "space" or key == "up" or key == "z" then
             self.world.player:jump_pressed()
         end
         if key == "lctrl" or key == "rctrl" then
