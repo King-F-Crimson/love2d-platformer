@@ -26,7 +26,7 @@ function grenade:init(x, y, world, facing_right)
         self.x, self.y, self.world, self.facing_right = x, y, world, facing_right
     end
 
-    self.velocity = { x = 6, y = -2 }
+    self.velocity = { x = 4, y = -2 }
     self.acceleration = { x = 0, y = 4/60 }
 
     if not self.facing_right then

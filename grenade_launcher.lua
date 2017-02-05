@@ -33,6 +33,10 @@ function grenade_launcher:update(dt)
     end
 end
 
-function grenade_launcher:draw()
-    love.graphics.draw(self.sprite, self.wielder.x, self.wielder.y)
+function grenade_launcher:draw(x, y, facing_right)
+    if facing_right then
+        love.graphics.draw(self.sprite, x, y)
+    else
+        love.graphics.draw(self.sprite, x, y, 0, -1, 1)
+    end
 end

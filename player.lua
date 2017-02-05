@@ -6,6 +6,8 @@ require("grenade_launcher")
 local anim8 = require '../libs/anim8/anim8'
 
 player = entity:new({
+    w = 8,
+    h = 14,
     max_speed =    { x = 6, y = 6 },
     state = standing,
     properties = {is_player = true},
@@ -52,12 +54,32 @@ function player:draw()
     if self.invincibility_timer % 8 < 4 then
         if self.facing_right then
             animation:draw(sprite, self.x - 4, self.y - 2, 0, 1, 1)
-            self.gun:draw()
         else
             animation:draw(sprite, self.x + 12, self.y - 2, 0, -1, 1)
-            self.gun:draw()
         end
+        self.gun:draw(self:get_gun_position())
     end
+end
+
+function player:get_gun_position()
+    local animation = self.animation[self.state]
+    local position = { x, y }
+    
+    if self.facing_right then
+        position.x = self.x + self.w - 1
+    else
+        position.x = self.x + 1
+    end
+
+    local height = 0
+    if animation.position == 2 then
+        height = 1
+    elseif animation.position == 4 then
+        height = -1
+    end
+    position.y = self.y + 5 + height
+
+    return position.x, position.y, self.facing_right
 end
 
 function player:jump_pressed()
