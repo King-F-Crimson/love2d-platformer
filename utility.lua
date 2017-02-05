@@ -7,3 +7,9 @@ function math.sign(x)
         return 0
     end
 end
+
+function apply_to_all(table, operation)
+    for k, v in pairs(table) do
+        operation(k, v, table)
+    end
+end

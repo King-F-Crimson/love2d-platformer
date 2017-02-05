@@ -1,6 +1,7 @@
 require("entity")
 require("chili_monster")
 require("exit_door")
+require("utility")
 
 local sti = require "../libs/Simple-Tiled-Implementation/sti"
 local bump = require "../libs/bump_lua/bump"
@@ -93,6 +94,21 @@ function world:spawn_entity(entity, layer)
     entity.world = self
     entity.bump_world = self.bump_world
     entity:init()
+end
+
+function world:delete_entity(entity)
+    -- Container is the table the operation is being applied to.
+    local remove_entity = function(k, v, container) 
+        if v == entity then
+            table.remove(container, k)
+        end
+    end
+
+    apply_to_all(self.entities_layer.entities, remove_entity)
+    apply_to_all(self.background_entities_layer.entities, remove_entity)
+    apply_to_all(self.map.bump_collidables, remove_entity)
+    self.bump_world:remove(entity)
+    entity = nil
 end
 
 function world:update(dt)

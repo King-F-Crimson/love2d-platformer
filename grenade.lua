@@ -1,5 +1,6 @@
 require("movement")
 require("utility")
+require("explosion")
 
 grenade = {
     w = 4,
@@ -20,9 +21,9 @@ end
 
 function grenade:init(x, y, world, facing_right)
     self.fuse = 120
-    if x ~= nil and y ~= nil and world ~= nil then
+    -- Check to prevent init from world setting it to nil.
+    if x ~= nil and y ~= nil and world ~= nil and facing_right ~= nil then
         self.x, self.y, self.world, self.facing_right = x, y, world, facing_right
-        self.bump_world = world.bump_world
     end
 
     self.velocity = { x = 6, y = -2 }
@@ -36,6 +37,12 @@ end
 function grenade:update(dt)
     self:move()
     self:apply_friction()
+
+    if self.fuse > 0 then
+        self.fuse = self.fuse - 1
+    else
+        self:explode()
+    end
 end
 
 function grenade:move()
@@ -59,6 +66,16 @@ function grenade:on_collision(cols, len)
             end
         end
     end
+end
+
+function grenade:explode()
+    -- Create new explosion on its location.
+    local explosion = explosion:new()
+    explosion:init(self.x, self.y, self.world)
+    self.world:spawn_entity(explosion, self.world.entities_layer)
+
+    -- Delete self from bump world and the game.
+    self.world:delete_entity(self)
 end
 
 function grenade.filter(item, other)
