@@ -35,7 +35,7 @@ function grenade:init(x, y, facing_right, world)
 end
 
 function grenade:update(dt)
-    --self:move()
+    self:move()
     self:apply_friction()
 
     if self.fuse > 0 then
