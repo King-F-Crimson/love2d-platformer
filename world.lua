@@ -80,6 +80,7 @@ function world:init_bump_world()
     self.bump_world = bump.newWorld(16)
     self.map:bump_init(self.bump_world)
     self.bump_world:addResponse("one_way_slide", one_way_slide)
+    self.bump_world:addResponse("one_way_bounce", one_way_bounce)
     -- When the entities are added to the bump world should be changed.
     -- Add the player object to the world.
     self.bump_world:add(self.player, self.player.x+4, self.player.y, 8, 14)

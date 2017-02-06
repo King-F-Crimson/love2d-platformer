@@ -57,7 +57,7 @@ end
 
 function grenade:on_collision(cols, len)
     for i = 1, len do
-        if cols[i].other.properties.solid then
+        if cols[i].other.properties.solid or cols[i].touched then
             if cols[i].normal.x ~= 0 then
                 self.velocity.x = math.sign(cols[i].normal.x) * math.abs(self.velocity.x)
             end
@@ -83,6 +83,8 @@ end
 function grenade.filter(item, other)
     if other.properties.solid then
         return 'bounce'
+    elseif other.properties.one_way_platform then
+        return 'one_way_bounce'
     else
         return 'cross'
     end
