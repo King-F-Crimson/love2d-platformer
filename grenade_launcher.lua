@@ -21,8 +21,15 @@ function grenade_launcher:fire()
         local grenade = grenade:new()
         local wielder = self.wielder
         local world = self.wielder.world
+
         local x, y, facing_right = wielder:get_gun_position()
+        if facing_right then
+            x = x + 8
+        else
+            x = x - 12
+        end
         grenade:init(x, y, facing_right, world)
+
         world:spawn_entity(grenade, world.entities_layer)
         self.cooldown = 60
     end
