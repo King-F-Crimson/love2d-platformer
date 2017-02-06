@@ -119,8 +119,8 @@ function movement.is_grounded(entity)
         local other = cols[i].other
         local normal = cols[i].normal
         local touch = cols[i].touch
-        -- True if item hits solid object and collides from top.
-        if other.properties.solid and normal.x == 0 and normal.y == -1 and touch.y == entity.y then
+        -- True if item hits solid or one way platform object and collides from top.
+        if (other.properties.solid or other.properties.one_way_platform) and normal.x == 0 and normal.y == -1 and touch.y == entity.y then
             is_grounded = true
         end
     end

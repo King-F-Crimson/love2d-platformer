@@ -45,6 +45,8 @@ end
 function entity.filter(item, other)
     if other.properties.solid then
         return 'slide'
+    elseif other.properties.one_way_platform then
+        return 'one_way_slide'
     else
         return 'cross'
     end
