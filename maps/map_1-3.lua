@@ -166,7 +166,7 @@ return {
       type = "objectgroup",
       name = "Spawn Points",
       visible = true,
-      opacity = 1,
+      opacity = 0,
       offsetx = 0,
       offsety = 0,
       draworder = "topdown",
