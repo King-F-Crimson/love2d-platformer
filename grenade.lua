@@ -50,8 +50,8 @@ function grenade:move()
 end
 
 function grenade:apply_friction()
-    -- Will result in 70% speed reduction after one second.
-    local friction = 0.3 ^ (1/60)
+    -- Will result in 60% speed reduction after one second.
+    local friction = 0.4 ^ (1/60)
     self.velocity.x, self.velocity.y = self.velocity.x * friction, self.velocity.y * friction
 end
 
