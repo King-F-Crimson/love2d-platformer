@@ -9,6 +9,8 @@ function love.load()
     love.window.setMode(768, 512)
     love.graphics.setDefaultFilter("nearest")
 
+    love.audio.setVolume(0.5)
+
     application.assets.font = love.graphics.newImageFont("assets/Resource-Imagefont.png",
     " abcdefghijklmnopqrstuvwxyz" ..
     "ABCDEFGHIJKLMNOPQRSTUVWXYZ0" ..
