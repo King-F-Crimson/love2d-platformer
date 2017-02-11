@@ -38,7 +38,7 @@ function grenade:update(dt)
     self:move()
     self:apply_friction()
 
-    if self.fuse > 0 then
+    if self.fuse > 0 and not self.explode_flag then
         self.fuse = self.fuse - 1
     else
         self:explode()
@@ -65,7 +65,7 @@ function grenade:on_collision(cols, len)
                 self.velocity.y = math.sign(cols[i].normal.y) * math.abs(self.velocity.y)
             end
         elseif cols[i].other.properties.is_enemy then
-            self:explode()
+            self.explode_flag = true
         end
     end
 end
