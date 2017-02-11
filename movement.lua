@@ -1,6 +1,6 @@
 standing = { name = "standing" }
 walking  = { name = "walking"  }
-jumping  = { name = "jumping"  }
+jumping  = { name = "jumping", jump_sound = love.audio.newSource("assets/jump_1.wav", "static") }
 falling  = { name = "falling"  }
 movement = {}
 
@@ -51,6 +51,8 @@ function jumping.enter(entity)
     entity.velocity.y = -5
     entity.jump_length = 15
     entity.minimum_length = 10
+
+    jumping.jump_sound:play()
 
     return jumping
 end

@@ -7,6 +7,7 @@ grenade = {
     h = 4,
     properties = {},
     sprite = love.graphics.newImage("assets/Grenade.png"),
+    explosion_sound = love.audio.newSource("assets/explosion_1.wav", "static"),
     max_speed = { x = 6, y = 6 }
 }
 
@@ -75,6 +76,9 @@ function grenade:explode()
     local explosion = explosion:new()
     explosion:init(self.x, self.y, self.world)
     self.world:spawn_entity(explosion, self.world.entities_layer)
+
+    -- Play explosion sound.
+    self.explosion_sound:play()
 
     -- Delete self from bump world and the game.
     self.world:delete_entity(self)

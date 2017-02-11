@@ -1,6 +1,9 @@
 require("game")
 
-menu = {}
+menu = {
+    scroll_sound = love.audio.newSource("assets/menu_scroll.wav", "static"),
+    select_sound = love.audio.newSource("assets/menu_select.wav", "static")
+}
 
 function menu:enter()
     self.main_menu = {
@@ -28,6 +31,7 @@ function menu:enter()
     -- Move the selected item with keys.
     function love.keypressed(key)
         if key == "w" or key == "up" then
+            self.scroll_sound:play()
             if self.pointer == 1 then
                 self.pointer = self.item_count    -- If self.pointer is at first item, set it to the last item.
             else
@@ -35,6 +39,7 @@ function menu:enter()
             end
         end
         if key == "r" or key == "down" then
+            self.scroll_sound:play()
             if self.pointer == self.item_count then
                 self.pointer = 1             -- If self.pointer is at last item, set it to the first item.
             else
@@ -42,6 +47,7 @@ function menu:enter()
             end
         end
         if key == "return" or key == "space" then
+            self.select_sound:play()
             self.actions[self.pointer]()
         end
     end

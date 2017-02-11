@@ -1,7 +1,8 @@
 require("grenade")
 
 grenade_launcher = {
-    sprite = love.graphics.newImage("assets/Grenade_Launcher.png")
+    sprite = love.graphics.newImage("assets/Grenade_Launcher.png"),
+    fire_sound = love.audio.newSource("assets/grenade_fire.wav", "static")
 }
 grenade_launcher.sprite:setFilter("nearest")
 
@@ -29,6 +30,7 @@ function grenade_launcher:fire()
             x = x - 12
         end
         grenade:init(x, y, facing_right, world)
+        self.fire_sound:play()
 
         world:spawn_entity(grenade, world.entities_layer)
         self.cooldown = 60
