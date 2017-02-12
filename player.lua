@@ -30,6 +30,8 @@ function player:init(spawn)
     self.y      = spawn.y
     self.velocity = { x = 0, y = 0 }
     self.acceleration = { x = 0, y = 0 }
+    self.health = 3
+    self.max_health = 3
 
     self.gun = grenade_launcher:new()
     self.gun:init()
@@ -113,11 +115,20 @@ end
 function player:on_collision(cols, len)
     for i = 1, len do
         if cols[i].other.properties.is_enemy and self.invincibility_timer == 0 then
-            self:get_hurt()
+            self:damaged()
         end
     end
 end
 
-function player:get_hurt()
+function player:damaged()
+    self.health = self.health - 1
+    if self.health <= 0 then
+        player:die()
+    end
+
     self.invincibility_timer = 60
+end
+
+function player:die()
+
 end

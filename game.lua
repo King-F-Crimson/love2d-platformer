@@ -1,11 +1,15 @@
 require("player")
 require("world")
+require("hud")
 
 game = {}
 
 function game:enter(map)
     self.world = world:new()
     self.world:init(map)
+
+    self.hud = hud:new()
+    self.hud:init(self.world, self.world.player)
 
     -- Set the love.keypressed function to change back to menu state and to send signal to the Player object.
     function love.keypressed(key)
@@ -28,4 +32,5 @@ end
 
 function game:draw()
     self.world:draw()
+    self.hud:draw()
 end

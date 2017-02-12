@@ -129,6 +129,7 @@ function world:draw()
     local ty = player.y - screen.height / 2
 
     -- Apply world transform
+    love.graphics.push()
     love.graphics.scale(scale)
     love.graphics.translate(-tx, -ty)
 
