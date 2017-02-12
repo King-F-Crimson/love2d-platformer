@@ -8,7 +8,9 @@ local anim8 = require '../libs/anim8/anim8'
 player = entity:new({
     w = 8,
     h = 14,
-    max_speed =    { x = 6, y = 6 },
+    origin = { x = 4, y = 2 },
+
+    max_speed = { x = 6, y = 6 },
     state = standing,
     properties = {is_player = true},
     invincibility_timer = 0,
@@ -58,9 +60,9 @@ function player:draw()
     -- Blinks for four frames when invincible.
     if self.invincibility_timer % 8 < 4 then
         if self.facing_right then
-            animation:draw(sprite, self.x - 4, self.y - 2, 0, 1, 1)
+            animation:draw(sprite, self.x, self.y, 0, 1, 1, self.origin.x, self.origin.y)
         else
-            animation:draw(sprite, self.x + 12, self.y - 2, 0, -1, 1)
+            animation:draw(sprite, self.x + self.w, self.y, 0, -1, 1, self.origin.x, self.origin.y)
         end
         self.gun:draw(self:get_gun_position())
     end

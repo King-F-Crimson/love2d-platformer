@@ -3,6 +3,8 @@ entity = {
     y = 0,
     w = 0,
     h = 0,
+    origin = { x = 0, y = 0 },
+
     velocity =     { x = 0, y = 0 },
     acceleration = { x = 0, y = 0 },
     max_speed =    { x = 6, y = 6 },
@@ -21,9 +23,9 @@ end
 
 function entity:draw()
 	if self.facing_right then
-		love.graphics.draw(self.sprite, self.x, self.y)
+		love.graphics.draw(self.sprite, self.x, self.y, 0, 1, 1, self.origin.x, self.origin.y)
 	else
-		love.graphics.draw(self.sprite, self.x + 16, self.y, 0, -1, 1)
+		love.graphics.draw(self.sprite, self.x + self.w, self.y, 0, -1, 1, self.origin.x, self.origin.y)
 	end
 end
 

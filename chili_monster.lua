@@ -4,8 +4,10 @@ require("movement")
 chili_monster = entity:new{
 	x = 0,
 	y = 0,
-	w = 16,
-	h = 16,
+	w = 8,
+	h = 14,
+	origin = { x = 4, y = 2 },
+
 	sprite = love.graphics.newImage("assets/Mexican_Chili_Monster.png"),
 	state = walking,
 	properties = {is_enemy = true}
