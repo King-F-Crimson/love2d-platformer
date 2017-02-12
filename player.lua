@@ -13,7 +13,8 @@ player = entity:new({
     properties = {is_player = true},
     invincibility_timer = 0,
 
-    damaged_sound = love.audio.newSource("assets/damaged.wav", "static")
+    damaged_sound = love.audio.newSource("assets/damaged.wav", "static"),
+    die_sound = love.audio.newSource("assets/die.mp3", "static"),
 })
 
 function player:new(o)
@@ -126,12 +127,13 @@ function player:damaged()
     self.health = self.health - 1
     if self.health <= 0 then
         player:die()
+    else
+        self.damaged_sound:play()
+        self.invincibility_timer = 60
     end
-
-    self.invincibility_timer = 60
-    self.damaged_sound:play()
 end
 
 function player:die()
+    self.die_sound:play()
     state.enter(menu)
 end
