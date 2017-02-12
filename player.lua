@@ -128,7 +128,7 @@ end
 function player:damaged()
     self.health = self.health - 1
     if self.health <= 0 then
-        player:die()
+        self:die()
     else
         self.damaged_sound:play()
         self.invincibility_timer = 60
@@ -137,5 +137,5 @@ end
 
 function player:die()
     self.die_sound:play()
-    state.enter(menu)
+    self.world.game:finish()
 end

@@ -1,4 +1,5 @@
 require("state")
+require("result")
 
 exit_door = {
     properties = {}
@@ -30,7 +31,7 @@ function exit_door:check_player_exit()
     for i = 1, len do
         if cols[i].other.properties.is_player then
             if love.keyboard.isDown("up") then
-                state.enter(menu)
+                self.world.game:finish()
             end
         end
     end

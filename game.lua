@@ -6,10 +6,12 @@ game = {}
 
 function game:enter(map)
     self.world = world:new()
-    self.world:init(map)
+    self.world:init(self, map)
 
     self.hud = hud:new()
     self.hud:init(self.world, self.world.player)
+
+    self.frame_count = 0
 
     -- Set the love.keypressed function to change back to menu state and to send signal to the Player object.
     function love.keypressed(key)
@@ -26,8 +28,16 @@ function game:enter(map)
     end
 end
 
+function game:finish()
+    local args = {
+        time = self.frame_count / 60
+    }
+    state.enter(result, args)
+end
+
 function game:update(dt)
     self.world:update(dt)
+    self.frame_count = self.frame_count + 1
 end
 
 function game:draw()

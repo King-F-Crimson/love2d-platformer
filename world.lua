@@ -19,7 +19,8 @@ function world:new(o)
     return o
 end
 
-function world:init(map)
+function world:init(game, map)
+    self.game = game
     self.map = sti(map, { "bump" })
     self:create_layer("background_entities", 2)
     self:create_layer("entities", 3)
