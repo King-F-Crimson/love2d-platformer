@@ -51,19 +51,20 @@ function grenade:move()
 end
 
 function grenade:apply_friction()
-    -- Will result in 60% speed reduction after one second.
-    local friction = 0.4 ^ (1/60)
+    -- Speed will be 0.8 times of its original after one second (60 frames).
+    local friction = 0.8 ^ (1/60)
     self.velocity.x, self.velocity.y = self.velocity.x * friction, self.velocity.y * friction
 end
 
 function grenade:on_collision(cols, len)
     for i = 1, len do
         if cols[i].other.properties.solid or cols[i].touched then
+            -- Collision mirrors the velocity and reduce it.
             if cols[i].normal.x ~= 0 then
-                self.velocity.x = math.sign(cols[i].normal.x) * math.abs(self.velocity.x)
+                self.velocity.x = math.sign(cols[i].normal.x) * math.abs(self.velocity.x) * 0.6
             end
             if cols[i].normal.y ~= 0 then
-                self.velocity.y = math.sign(cols[i].normal.y) * math.abs(self.velocity.y)
+                self.velocity.y = math.sign(cols[i].normal.y) * math.abs(self.velocity.y) * 0.6
             end
         elseif cols[i].other.properties.is_enemy then
             self.explode_flag = true
