@@ -137,5 +137,5 @@ end
 
 function player:die()
     self.die_sound:play()
-    self.world.game:finish()
+    self.world.game:finish(false)
 end

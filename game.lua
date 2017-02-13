@@ -28,9 +28,10 @@ function game:enter(map)
     end
 end
 
-function game:finish()
+function game:finish(win)
     local args = {
-        time = self.frame_count / 60
+        time = self.frame_count / 60,
+        win = win
     }
     state.enter(result, args)
 end
