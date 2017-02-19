@@ -3,6 +3,7 @@ require("chili_monster")
 require("exit_door")
 require("utility")
 require("one_way_platform")
+require("slope")
 
 local sti = require "../libs/Simple-Tiled-Implementation/sti"
 local bump = require "../libs/bump_lua/bump"
@@ -27,7 +28,7 @@ function world:init(game, map)
     self:create_player()
     self:init_bump_world()
 
-    self:spawn_entity(chili_monster:new{x = 16, velocity = {x = 0, y = 0}}, self.entities_layer)
+    -- self:spawn_entity(chili_monster:new{x = 16, velocity = {x = 0, y = 0}}, self.entities_layer)
 
     local door_spawn = self:find_object("Exit_Door")
     self:spawn_entity(exit_door:new({x = door_spawn.x, y = door_spawn.y, w = door_spawn.width, h = door_spawn.height}),
