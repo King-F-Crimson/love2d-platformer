@@ -25,8 +25,8 @@ function world:init(game, map)
     self.map = sti(map, { "bump" })
     self:create_layer("background_entities", 2)
     self:create_layer("entities", 3)
-    self:create_player()
     self:init_bump_world()
+    self:create_player()
 
     -- self:spawn_entity(chili_monster:new{x = 16, velocity = {x = 0, y = 0}}, self.entities_layer)
 
@@ -76,6 +76,11 @@ function world:create_player()
 
     self.player = self.entities_layer.entities.player
     self.player.world = self
+
+    self.bump_world:add(self.player, self.player.x + 4, self.player.y, 8, 14)
+    self.player.bump_world = self.bump_world
+    -- Add the player collidable object to self.map collidables so it's drawn in self.map:bump_draw(world).
+    table.insert(self.map.bump_collidables, self.player)
 end
 
 function world:init_bump_world()
@@ -83,12 +88,6 @@ function world:init_bump_world()
     self.map:bump_init(self.bump_world)
     self.bump_world:addResponse("one_way_slide", one_way_slide)
     self.bump_world:addResponse("one_way_bounce", one_way_bounce)
-    -- When the entities are added to the bump world should be changed.
-    -- Add the player object to the world.
-    self.bump_world:add(self.player, self.player.x+4, self.player.y, 8, 14)
-    self.player.bump_world = self.bump_world
-    -- Add the player collidable object to self.map collidables so it's drawn in self.map:bump_draw(world).
-    table.insert(self.map.bump_collidables, self.player)
 end
 
 function world:spawn_entity(entity, layer)

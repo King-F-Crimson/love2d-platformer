@@ -49,10 +49,6 @@ function entity.filter(item, other)
         return 'slide'
     elseif other.properties.one_way_platform then
         return 'one_way_slide'
-    elseif other.properties.slope_right then
-        return 'slope_right'
-    elseif other.properties.slope_left then
-        return 'slope_left'
     else
         return 'cross'
     end
