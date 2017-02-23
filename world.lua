@@ -10,7 +10,12 @@ local bump = require "../libs/bump_lua/bump"
 local anim8 = require '../libs/anim8/anim8'
 
 world = {
-    draw_hitbox = true
+    draw_hitbox = true,
+    object_classes = {
+        player = player,
+        exit_door = exit_door,
+        chili_spawner = chili_spawner,
+    }
 }
 
 function world:new(o)
@@ -27,12 +32,8 @@ function world:init(game, map)
     self:create_layer("entities", 3)
     self:init_bump_world()
     self:create_player()
-
+    self:generate_objects()
     -- self:spawn_entity(chili_monster:new{x = 16, velocity = {x = 0, y = 0}}, self.entities_layer)
-
-    local door_spawn = self:find_object("Exit_Door")
-    self:spawn_entity(exit_door:new({x = door_spawn.x, y = door_spawn.y, w = door_spawn.width, h = door_spawn.height}),
-        self.background_entities_layer)
 end
 
 function world:create_layer(name, level)
@@ -88,6 +89,21 @@ function world:init_bump_world()
     self.map:bump_init(self.bump_world)
     self.bump_world:addResponse("one_way_slide", one_way_slide)
     self.bump_world:addResponse("one_way_bounce", one_way_bounce)
+end
+
+function world:generate_objects()
+    local objects = self.map.layers["Spawn Points"].objects
+    for k, object in pairs(self.map.objects) do
+        print(object.name)
+        local object_class = self.object_classes[object.name]
+        local base_object = {x = object.x, y = object.y, w = object.width, h = object.height, properties = object.properties}
+        self:spawn_entity(object_class:new(base_object), self.entities_layer)
+    end
+
+    -- Generate exit door
+    -- local door_spawn = self:find_object("Exit_Door")
+    -- self:spawn_entity(exit_door:new({x = door_spawn.x, y = door_spawn.y, w = door_spawn.width, h = door_spawn.height}),
+    --     self.background_entities_layer)
 end
 
 function world:spawn_entity(entity, layer)

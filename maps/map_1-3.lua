@@ -8,7 +8,7 @@ return {
   height = 32,
   tilewidth = 16,
   tileheight = 16,
-  nextobjectid = 4,
+  nextobjectid = 6,
   properties = {},
   tilesets = {
     {
@@ -174,7 +174,7 @@ return {
       objects = {
         {
           id = 1,
-          name = "Player",
+          name = "player",
           type = "",
           shape = "rectangle",
           x = 64,
@@ -187,13 +187,39 @@ return {
         },
         {
           id = 2,
-          name = "Exit_Door",
+          name = "exit_door",
           type = "",
           shape = "rectangle",
           x = 496,
           y = 80,
           width = 32,
           height = 48,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 4,
+          name = "chili_spawner",
+          type = "",
+          shape = "rectangle",
+          x = 336,
+          y = 192,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 5,
+          name = "chili_spawner",
+          type = "",
+          shape = "rectangle",
+          x = 608,
+          y = 160,
+          width = 16,
+          height = 16,
           rotation = 0,
           visible = true,
           properties = {}
