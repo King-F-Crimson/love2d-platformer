@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="48" height="32" tilewidth="16" tileheight="16" nextobjectid="6">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="48" height="32" tilewidth="16" tileheight="16" nextobjectid="8">
  <tileset firstgid="1" name="Outdoor_Tileset" tilewidth="16" tileheight="16" tilecount="16" columns="4">
   <image source="../assets/Outdoor_Tileset.png" width="64" height="64"/>
   <tile id="0">
@@ -72,7 +72,7 @@
    </properties>
   </tile>
  </tileset>
- <layer name="Tile Layer 1" width="48" height="32">
+ <layer name="tile_1" width="48" height="32">
   <data encoding="csv">
 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
@@ -108,10 +108,29 @@
 6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6
 </data>
  </layer>
- <objectgroup name="Spawn Points" opacity="0">
-  <object id="1" name="player" x="64" y="272" width="16" height="16"/>
-  <object id="2" name="exit_door" x="496" y="80" width="32" height="48"/>
-  <object id="4" name="chili_spawner" x="336" y="192" width="16" height="16"/>
-  <object id="5" name="chili_spawner" x="608" y="160" width="16" height="16"/>
+ <objectgroup name="spawn_points" opacity="0.33">
+  <object id="1" name="player_spawn" x="68" y="274" width="8" height="14">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="is_player" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2" name="exit_door" x="496" y="80" width="32" height="48">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="4" name="chili_spawner" x="340" y="194" width="8" height="14">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="is_enemy" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="6" name="chili_spawner" x="612" y="162" width="8" height="14">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="is_enemy" type="bool" value="false"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

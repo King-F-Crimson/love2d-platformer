@@ -8,7 +8,7 @@ return {
   height = 32,
   tilewidth = 16,
   tileheight = 16,
-  nextobjectid = 6,
+  nextobjectid = 8,
   properties = {},
   tilesets = {
     {
@@ -116,7 +116,7 @@ return {
   layers = {
     {
       type = "tilelayer",
-      name = "Tile Layer 1",
+      name = "tile_1",
       x = 0,
       y = 0,
       width = 48,
@@ -164,9 +164,9 @@ return {
     },
     {
       type = "objectgroup",
-      name = "Spawn Points",
+      name = "spawn_points",
       visible = true,
-      opacity = 0,
+      opacity = 0.33,
       offsetx = 0,
       offsety = 0,
       draworder = "topdown",
@@ -174,16 +174,19 @@ return {
       objects = {
         {
           id = 1,
-          name = "player",
+          name = "player_spawn",
           type = "",
           shape = "rectangle",
-          x = 64,
-          y = 272,
-          width = 16,
-          height = 16,
+          x = 68,
+          y = 274,
+          width = 8,
+          height = 14,
           rotation = 0,
           visible = true,
-          properties = {}
+          properties = {
+            ["collidable"] = true,
+            ["is_player"] = true
+          }
         },
         {
           id = 2,
@@ -196,33 +199,41 @@ return {
           height = 48,
           rotation = 0,
           visible = true,
-          properties = {}
+          properties = {
+            ["collidable"] = true
+          }
         },
         {
           id = 4,
           name = "chili_spawner",
           type = "",
           shape = "rectangle",
-          x = 336,
-          y = 192,
-          width = 16,
-          height = 16,
+          x = 340,
+          y = 194,
+          width = 8,
+          height = 14,
           rotation = 0,
           visible = true,
-          properties = {}
+          properties = {
+            ["collidable"] = true,
+            ["is_enemy"] = false
+          }
         },
         {
-          id = 5,
+          id = 6,
           name = "chili_spawner",
           type = "",
           shape = "rectangle",
-          x = 608,
-          y = 160,
-          width = 16,
-          height = 16,
+          x = 612,
+          y = 162,
+          width = 8,
+          height = 14,
           rotation = 0,
           visible = true,
-          properties = {}
+          properties = {
+            ["collidable"] = true,
+            ["is_enemy"] = false
+          }
         }
       }
     }

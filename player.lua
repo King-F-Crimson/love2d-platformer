@@ -6,8 +6,6 @@ require("grenade_launcher")
 local anim8 = require '../libs/anim8/anim8'
 
 player = entity:new({
-    w = 8,
-    h = 14,
     origin = { x = 4, y = 2 },
 
     max_speed = { x = 6, y = 6 },
@@ -26,13 +24,13 @@ function player:new(o)
     return o
 end
 
-function player:init(spawn)
+function player:init()
+    self.name = "player"
+
     self.animation[standing], self.sprite[standing] = animate("assets/trump_stand.png", 24)
     self.animation[walking],  self.sprite[walking]  = animate("assets/trump_walk.png", 12)
     self.animation[jumping],  self.sprite[jumping]  = animate("assets/trump_jump.png", 12)
     self.animation[falling],  self.sprite[falling]  = animate("assets/trump_fall.png", 12)
-    self.x      = spawn.x
-    self.y      = spawn.y
     self.velocity = { x = 0, y = 0 }
     self.acceleration = { x = 0, y = 0 }
     self.health = 3
