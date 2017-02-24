@@ -10,8 +10,6 @@ entity = {
     max_speed =    { x = 6, y = 6 },
     properties = {},
     facing_right = true,
-    animation = {},
-    sprite = {},
 }
 
 function entity:new(o)

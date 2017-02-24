@@ -1,11 +1,11 @@
 require("movement")
 require("animate")
-require("entity")
+require("humanoid")
 require("grenade_launcher")
 
 local anim8 = require '../libs/anim8/anim8'
 
-player = entity:new({
+player = humanoid:new({
     origin = { x = 4, y = 2 },
 
     max_speed = { x = 6, y = 6 },
@@ -29,10 +29,6 @@ function player:init()
     self.properties = {}
     self.properties.is_player = true
 
-    self.animation[standing], self.sprite[standing] = animate("assets/trump_stand.png", 24)
-    self.animation[walking],  self.sprite[walking]  = animate("assets/trump_walk.png", 12)
-    self.animation[jumping],  self.sprite[jumping]  = animate("assets/trump_jump.png", 12)
-    self.animation[falling],  self.sprite[falling]  = animate("assets/trump_fall.png", 12)
     self.velocity = { x = 0, y = 0 }
     self.acceleration = { x = 0, y = 0 }
     self.health = 3
@@ -41,6 +37,12 @@ function player:init()
     self.gun = grenade_launcher:new()
     self.gun:init()
     self.gun.wielder = self
+
+    self.animation, self.sprite = {}, {}
+    self.animation[standing], self.sprite[standing] = animate("assets/trump_stand.png", 24)
+    self.animation[walking],  self.sprite[walking]  = animate("assets/trump_walk.png", 12)
+    self.animation[jumping],  self.sprite[jumping]  = animate("assets/trump_jump.png", 12)
+    self.animation[falling],  self.sprite[falling]  = animate("assets/trump_fall.png", 12)
 end
 
 function player:get_control()

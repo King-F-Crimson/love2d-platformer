@@ -1,7 +1,8 @@
 require("entity")
 require("movement")
+require("animate")
 
-chili_monster = entity:new{
+chili_monster = humanoid:new{
 	x = 0,
 	y = 0,
 	w = 8,
@@ -19,6 +20,12 @@ function chili_monster:init()
 
 	self.velocity = { x = 0, y = 0 }
 	self.acceleration = { x = 0, y = 0 }
+
+    self.animation, self.sprite = {}, {}
+    self.animation[standing], self.sprite[standing] = animate("assets/Mexican_Chili_Monster.png", 24)
+    self.animation[walking],  self.sprite[walking]  = animate("assets/Mexican_Chili_Monster_Walk.png", 12)
+    self.animation[jumping],  self.sprite[jumping]  = animate("assets/Mexican_Chili_Monster.png", 12)
+    self.animation[falling],  self.sprite[falling]  = animate("assets/Mexican_Chili_Monster.png", 12)
 end
 
 function chili_monster:get_control()
@@ -43,6 +50,8 @@ function chili_monster:get_control()
 end
 
 function chili_monster:update(dt)
+	entity.update_animations(self, dt)
+
     local control = self:get_control()
     self:move(control)
 
