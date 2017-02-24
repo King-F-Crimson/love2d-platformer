@@ -117,6 +117,7 @@
   </object>
   <object id="2" name="exit_door" x="496" y="80" width="32" height="48">
    <properties>
+    <property name="background" type="bool" value="true"/>
     <property name="collidable" type="bool" value="true"/>
    </properties>
   </object>
@@ -124,12 +125,15 @@
    <properties>
     <property name="collidable" type="bool" value="true"/>
     <property name="is_enemy" type="bool" value="false"/>
+    <property name="max_spawn" type="int" value="3"/>
    </properties>
   </object>
   <object id="6" name="chili_spawner" x="612" y="162" width="8" height="14">
    <properties>
     <property name="collidable" type="bool" value="true"/>
+    <property name="facing_right" type="bool" value="false"/>
     <property name="is_enemy" type="bool" value="false"/>
+    <property name="max_spawn" type="int" value="3"/>
    </properties>
   </object>
  </objectgroup>

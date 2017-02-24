@@ -26,6 +26,8 @@ end
 
 function player:init()
     self.name = "player"
+    self.properties = {}
+    self.properties.is_player = true
 
     self.animation[standing], self.sprite[standing] = animate("assets/trump_stand.png", 24)
     self.animation[walking],  self.sprite[walking]  = animate("assets/trump_walk.png", 12)

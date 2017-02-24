@@ -27,7 +27,6 @@ end
 
 function exit_door:check_player_exit()
     local x, y, cols, len = self.bump_world:check(self, self.x, self.y)
-    print(self.w, self.h)
 
     for i = 1, len do
         if cols[i].other.properties.is_player then

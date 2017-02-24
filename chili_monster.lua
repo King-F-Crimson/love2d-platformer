@@ -10,14 +10,15 @@ chili_monster = entity:new{
 
 	sprite = love.graphics.newImage("assets/Mexican_Chili_Monster.png"),
 	state = walking,
-	properties = {is_enemy = true}
 }
 chili_monster.sprite:setFilter("nearest")
 
 function chili_monster:init()
+	self.properties = {}
+	self.properties.is_enemy = true
+
 	self.velocity = { x = 0, y = 0 }
 	self.acceleration = { x = 0, y = 0 }
-	self.facing_right = true
 end
 
 function chili_monster:get_control()
@@ -44,6 +45,11 @@ end
 function chili_monster:update(dt)
     local control = self:get_control()
     self:move(control)
+
+    local x, y = self.world:check_distance(self, self.world.player)
+    if x > 480 or y > 320 then
+    	self:die()
+    end
 end
 
 function chili_monster:move(control)
@@ -54,7 +60,12 @@ end
 function chili_monster:on_collision(cols, len)
 	for i = 1, len do
 		if cols[i].other.properties.is_explosion then
-			self.world:delete_entity(self)
+			self:die()
 		end
 	end
+end
+
+function chili_monster:die()
+	self.spawner.spawned = self.spawner.spawned - 1
+	self.world:delete_entity(self)
 end

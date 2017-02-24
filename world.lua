@@ -35,6 +35,7 @@ function world:init(game, map)
     self:generate_objects()
 
     self.player = self:find_object("player")
+    self.map:bump_removeLayer("spawn_points", self.bump_world)
     self.map:removeLayer("spawn_points")
 end
 
@@ -81,7 +82,12 @@ function world:generate_objects()
     for k, object in pairs(objects) do
         local object_class = self.object_class[object.name]
         local base_object = {x = object.x, y = object.y, w = object.width, h = object.height, properties = object.properties}
-        self:spawn_entity(object_class:new(base_object), self.entities_layer)
+
+        local layer = self.entities_layer
+        if object.properties.background then
+            layer = self.background_entities_layer
+        end
+        self:spawn_entity(object_class:new(base_object), layer)
     end
 end
 
@@ -109,6 +115,10 @@ function world:delete_entity(entity)
     apply_to_all(self.map.bump_collidables, remove_entity)
     self.bump_world:remove(entity)
     entity = nil
+end
+
+function world:check_distance(object1, object2)
+    return math.abs(object1.x - object2.x), math.abs(object1.y - object2.y)
 end
 
 function world:update(dt)

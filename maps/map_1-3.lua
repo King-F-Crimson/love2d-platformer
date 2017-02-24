@@ -200,6 +200,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
+            ["background"] = true,
             ["collidable"] = true
           }
         },
@@ -216,7 +217,8 @@ return {
           visible = true,
           properties = {
             ["collidable"] = true,
-            ["is_enemy"] = false
+            ["is_enemy"] = false,
+            ["max_spawn"] = 3
           }
         },
         {
@@ -232,7 +234,9 @@ return {
           visible = true,
           properties = {
             ["collidable"] = true,
-            ["is_enemy"] = false
+            ["facing_right"] = false,
+            ["is_enemy"] = false,
+            ["max_spawn"] = 3
           }
         }
       }
