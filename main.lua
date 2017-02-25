@@ -23,10 +23,6 @@ function love.load()
 end
 
 function love.update(dt)
-    if love.keyboard.isDown("escape") then
-        love.event.push("quit")
-    end
-
     application.state:update(dt)
 end
 

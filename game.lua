@@ -11,6 +11,8 @@ function game:enter(map)
     self.hud = hud:new()
     self.hud:init(self.world, self.world.player)
 
+    self.is_paused = false
+
     self.frame_count = 0
 
     -- Set the love.keypressed function to change back to menu state and to send signal to the Player object.
