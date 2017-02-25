@@ -21,7 +21,7 @@ end
 
 function hud:draw()
     -- Restores the transform from world.
-    love.graphics.pop()
+    love.graphics.push()
     love.graphics.scale(2)
 
     -- Draw hearts as many as the player's max health.
@@ -36,4 +36,5 @@ function hud:draw()
         end
         love.graphics.draw(sprite, x, y)
     end
+    love.graphics.pop()
 end

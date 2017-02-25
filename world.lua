@@ -144,4 +144,5 @@ function world:draw()
     if self.draw_hitbox then
         self.map:bump_draw(self.bump_world)
     end
+    love.graphics.pop()
 end

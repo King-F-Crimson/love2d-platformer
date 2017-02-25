@@ -1,34 +1,19 @@
-require("game")
-
 menu = {
+    x = 10,
+    y = 20,
+    y_spacing = 14,
     scroll_sound = love.audio.newSource("assets/menu_scroll.wav", "static"),
-    select_sound = love.audio.newSource("assets/menu_select.wav", "static")
+    select_sound = love.audio.newSource("assets/menu_select.wav", "static"),
 }
 
-function menu:enter()
-    self.main_menu = {
-        items = { "Start", "Exit" },
-        actions = {
-            function() self:set_submenu(self.map_menu) end,
-            function() love.event.push("quit") end
-        }
-    }
+function menu:new(o)
+    o = o or {}
+    setmetatable(o, self)
+    self.__index = self
+    return o
+end
 
-    -- If required, create code to automatically generate map menu.
-    -- May require scrolling if there are too many maps.
-    self.map_menu = {
-        items = { "1-1", "1-2", "1-3", "1-4", "Return" },
-        actions = {
-            function() state.enter(game, "maps/map_1-1.lua") end,
-            function() state.enter(game, "maps/map_1-2.lua") end,
-            function() state.enter(game, "maps/map_1-3.lua") end,
-            function() state.enter(game, "maps/map_1-4.lua") end,
-            function() self:set_submenu(self.main_menu) end
-        }
-    }
-
-    self:set_submenu(self.main_menu)
-
+function menu:set_control()
     -- Move the selected item with keys.
     function love.keypressed(key)
         if key == "w" or key == "up" then
@@ -70,8 +55,8 @@ function menu:draw()
 
     for i = 1, self.item_count do
         if i == self.pointer then
-            love.graphics.print('-', 10, 20 + (i * 14))
+            love.graphics.print('-', self.x , self.y + (i * self.y_spacing))
         end
-        love.graphics.print(self.items[i], 20, 20 + (i * 14))
+        love.graphics.print(self.items[i], self.x + 10 , self.y  + (i * self.y_spacing))
     end
 end
