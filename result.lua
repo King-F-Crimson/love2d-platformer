@@ -5,7 +5,7 @@ function result:enter(args)
     self.win = args.win
 
     function love.keypressed(key)
-        state.enter(menu)
+        state.enter(menu_state)
     end
 end
 
