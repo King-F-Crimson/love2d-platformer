@@ -132,8 +132,8 @@ function world:draw()
 
     -- Translate world to put the player in the center
     local player = self.player
-    local tx = player.x - screen.width / 2
-    local ty = player.y - screen.height / 2
+    local tx = player.x - screen.width / 2 + player.w / 2
+    local ty = player.y - screen.height / 2 + player.w / 2
 
     -- Apply world transform
     love.graphics.push()

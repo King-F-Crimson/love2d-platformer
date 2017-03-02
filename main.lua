@@ -1,6 +1,6 @@
 require("run")
 require("state")
-require("menu_state")
+require("title")
 
 application = {}
 application.assets = {}
@@ -19,7 +19,7 @@ function love.load()
 
     love.graphics.setFont(application.assets.font)
 
-    state.enter(menu_state)
+    state.enter(title)
 end
 
 function love.update(dt)
