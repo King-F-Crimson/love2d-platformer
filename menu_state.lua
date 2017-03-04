@@ -3,6 +3,10 @@ require("menu")
 
 menu_state = menu:new()
 
+menu_state.brick = love.graphics.newImage("assets/Brick_Tile.png")
+menu_state.brick:setFilter("nearest")
+menu_state.brick:setWrap("repeat")
+
 function menu_state:enter()
     self.main_menu = {
         items = { "Start", "Exit" },
@@ -25,7 +29,20 @@ function menu_state:enter()
         }
     }
 
+    self.background = love.graphics.newQuad(0, 0, love.graphics.getWidth(), love.graphics.getHeight(), self.brick:getDimensions())
+
     self:set_control()
     self:set_submenu(self.main_menu)
     love.graphics.push()
+end
+
+function menu_state:draw()
+    love.graphics.push()
+    love.graphics.scale(2)
+
+    love.graphics.draw(self.brick, self.background)
+
+    love.graphics.pop()
+
+    menu.draw(self)
 end

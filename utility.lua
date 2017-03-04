@@ -28,3 +28,8 @@ function deepcopy(orig)
     end
     return copy
 end
+
+-- This assumes origin is top left.
+function center(obj_length, container_length, scale)
+    return (container_length / 2 - obj_length) / scale
+end
