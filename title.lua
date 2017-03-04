@@ -5,6 +5,7 @@ require("utility")
 title = {
     logo = love.graphics.newImage("assets/Trump-16_Logo.png"),
     brick = love.graphics.newImage("assets/Brick_Tile.png"),
+    start = love.audio.newSource("assets/game_start.ogg", "static")
 }
 title.logo:setFilter("nearest")
 title.brick:setFilter("nearest")
@@ -17,6 +18,7 @@ function title:enter()
     self.background = love.graphics.newQuad(0, 0, love.graphics.getWidth(), love.graphics.getHeight(), self.brick:getDimensions())
 
     function love.keypressed(key)
+        self.start:play()
         state.enter(menu_state)
     end
 end
