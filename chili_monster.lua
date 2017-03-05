@@ -55,6 +55,7 @@ function chili_monster:update(dt)
     local control = self:get_control()
     self:move(control)
 
+    -- Despawn when too far from player.
     local x, y = self.world:check_distance(self, self.world.player)
     if x > 480 or y > 320 then
     	self:die()
