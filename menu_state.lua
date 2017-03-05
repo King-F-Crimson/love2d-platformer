@@ -19,12 +19,14 @@ function menu_state:enter()
     -- If required, create code to automatically generate map menu.
     -- May require scrolling if there are too many maps.
     self.map_menu = {
-        items = { "1-1", "1-2", "1-3", "1-4", "Return" },
+        items = { "1-1", "1-2", "1-3", "1-4", "1-5", "1-6", "Return" },
         actions = {
             function() state.enter(game, "maps/map_1-1.lua") end,
             function() state.enter(game, "maps/map_1-2.lua") end,
             function() state.enter(game, "maps/map_1-3.lua") end,
             function() state.enter(game, "maps/map_1-4.lua") end,
+            function() state.enter(game, "maps/map_1-5.lua") end,
+            function() state.enter(game, "maps/map_1-6.lua") end,
             function() self:set_submenu(self.main_menu) end
         }
     }
