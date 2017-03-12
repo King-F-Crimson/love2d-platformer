@@ -29,8 +29,8 @@ end
 function world:init(game, map)
     self.game = game
     self.map = sti(map, { "bump" })
-    self:create_layer_for_entities("background_entities", 2)
-    self:create_layer_for_entities("entities", 3)
+    self:create_layer_for_entities("background_entities", 3)
+    self:create_layer_for_entities("entities", 4)
     self:init_bump_world()
     self:generate_objects()
 
