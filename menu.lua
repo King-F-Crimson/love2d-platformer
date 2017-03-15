@@ -32,7 +32,7 @@ function menu:set_control()
                 self.pointer = self.pointer + 1
             end
         end
-        if key == "return" or key == "space" then
+        if key == "return" or key == "space" or key == "z" then
             self.select_sound:play()
             self.actions[self.pointer]()
         end
