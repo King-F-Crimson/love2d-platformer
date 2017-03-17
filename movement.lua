@@ -2,6 +2,7 @@ standing = { name = "standing" }
 walking  = { name = "walking"  }
 jumping  = { name = "jumping", jump_sound = love.audio.newSource("assets/jump_1.wav", "static") }
 falling  = { name = "falling"  }
+climbing = { name = "climbing" }
 movement = {}
 
 -- Standing control
@@ -16,6 +17,9 @@ end
 function standing.move(entity, input)
     if input.left or input.right then
         entity.state = walking.enter(entity)
+    end
+    if input.up and entity:on_ladder() then
+        entity.state = climbing.enter(entity)
     end
     if entity.ready_jump then
         entity.ready_jump = false
@@ -33,6 +37,9 @@ function walking.enter(entity)
 end
 
 function walking.move(entity, input)
+    if input.up and entity:on_ladder() then
+        entity.state = climbing.enter(entity)
+    end
     if not input.left and not input.right then
         entity.state = standing.enter(entity)
     else
@@ -69,6 +76,9 @@ function jumping.move(entity, input)
         entity.velocity.y = 0
         entity.state = falling.enter(entity)
     end
+    if input.up and entity:on_ladder() then
+        entity.state = climbing.enter(entity)
+    end
 end
 
 -- Falling control
@@ -85,6 +95,38 @@ function falling.move(entity, input)
         else
             entity.state = walking.enter(entity)
         end
+    end
+    if input.up and entity:on_ladder() then
+        entity.state = climbing.enter(entity)
+    end
+end
+
+function climbing.enter(entity)
+    entity.acceleration.x = 0
+    entity.acceleration.y = 0
+    entity.velocity.x = 0
+    entity.velocity.y = 0
+    print("CLIMBING")
+    return climbing
+end
+
+function climbing.move(entity, input)
+    entity.velocity.x, entity.velocity.y = 0, 0
+    if input.right then
+        entity.velocity.x = entity.velocity.x + 2
+    end
+    if input.left then
+        entity.velocity.x = entity.velocity.x - 2
+    end
+    if input.down then
+        entity.velocity.y = entity.velocity.y + 2
+    end
+    if input.up then
+        entity.velocity.y = entity.velocity.y - 2
+    end
+
+    if not entity:on_ladder() then
+        entity.state = falling.enter(entity)
     end
 end
 

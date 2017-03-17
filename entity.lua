@@ -42,6 +42,19 @@ function entity:on_collision(cols, len)
 
 end
 
+function entity:on_ladder()
+    local on_ladder = false
+
+    local x, y, cols, len = self.bump_world:check(self, self.x, self.y)
+    for i = 1, len do
+        if cols[i].other.properties.ladder then
+            on_ladder = true
+        end
+    end
+
+    return on_ladder
+end
+
 function entity.filter(item, other)
     if other.properties.solid then
         return 'slide'

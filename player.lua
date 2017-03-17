@@ -43,13 +43,16 @@ function player:init()
     self.animation[walking],  self.sprite[walking]  = animate("assets/trump_walk.png", 12)
     self.animation[jumping],  self.sprite[jumping]  = animate("assets/trump_jump.png", 12)
     self.animation[falling],  self.sprite[falling]  = animate("assets/trump_fall.png", 12)
+    self.animation[climbing], self.sprite[climbing] = animate("assets/trump_stand.png", 24)
 end
 
 function player:get_control()
     local control = { left = false, right = false, jump = false, fire = false }
     control.left  = love.keyboard.isDown("left")  or love.keyboard.isDown("a")
     control.right = love.keyboard.isDown("right") or love.keyboard.isDown("s")
-    control.jump  = love.keyboard.isDown("up")    or love.keyboard.isDown("space") or love.keyboard.isDown("z")
+    control.down  = love.keyboard.isDown("down")
+    control.up    = love.keyboard.isDown("up")
+    control.jump  = love.keyboard.isDown("space") or love.keyboard.isDown("z")
     control.fire  = love.keyboard.isDown("x")
 
     return control
