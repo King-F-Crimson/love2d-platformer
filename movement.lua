@@ -106,7 +106,6 @@ function climbing.enter(entity)
     entity.acceleration.y = 0
     entity.velocity.x = 0
     entity.velocity.y = 0
-    print("CLIMBING")
     return climbing
 end
 
