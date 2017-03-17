@@ -32,7 +32,7 @@ function game:set_control()
             self:pause()
         end
         -- Shorthop can be added by adding the button here without adding it in player:get_control().
-        if key == "space" or key == "up" or key == "z" then
+        if key == "space" or key == "z" then
             self.world.player:jump_pressed()
         end
         if key == "lctrl" or key == "rctrl" then
