@@ -124,6 +124,12 @@ function climbing.move(entity, input)
         entity.velocity.y = entity.velocity.y - 2
     end
 
+    if entity.velocity.x > 0 then
+        entity.facing_right = true
+    elseif entity.velocity.x < 0 then
+        entity.facing_right = false
+    end
+
     if not entity:on_ladder() then
         entity.state = falling.enter(entity)
     end
