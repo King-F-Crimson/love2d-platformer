@@ -169,7 +169,8 @@ function movement.is_grounded(entity)
         local normal = cols[i].normal
         local touch = cols[i].touch
         -- True if item hits solid or one way platform object and collides from top.
-        if (other.properties.solid or other.properties.one_way_platform) and normal.x == 0 and normal.y == -1 and touch.y == entity.y then
+        -- love.keyboard.isDown("down") is for passing down a one way platform when down is pressed.
+        if (other.properties.solid or (other.properties.one_way_platform and not love.keyboard.isDown("down"))) and normal.x == 0 and normal.y == -1 and touch.y == entity.y then
             is_grounded = true
         end
     end

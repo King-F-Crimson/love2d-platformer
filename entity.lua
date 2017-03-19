@@ -59,7 +59,11 @@ function entity.filter(item, other)
     if other.properties.solid then
         return 'slide'
     elseif other.properties.one_way_platform then
-        return 'one_way_slide'
+        if love.keyboard.isDown("down") then
+            return 'cross'
+        else
+            return 'one_way_slide'
+        end
     else
         return 'cross'
     end
