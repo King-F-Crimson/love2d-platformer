@@ -45,7 +45,7 @@ end
 function entity:on_ladder()
     local on_ladder = false
 
-    local x, y, cols, len = self.bump_world:check(self, self.x, self.y)
+    local x, y, cols, len = self.bump_world:check(self, self.x, self.y, self.filter)
     for i = 1, len do
         if cols[i].other.properties.ladder then
             on_ladder = true
