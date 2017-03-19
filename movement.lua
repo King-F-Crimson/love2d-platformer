@@ -18,7 +18,7 @@ function standing.move(entity, input)
     if input.left or input.right then
         entity.state = walking.enter(entity)
     end
-    if input.up and entity:on_ladder() then
+    if (input.up or input.down) and entity:on_ladder() then
         entity.state = climbing.enter(entity)
     end
     if entity.ready_jump then
@@ -37,7 +37,7 @@ function walking.enter(entity)
 end
 
 function walking.move(entity, input)
-    if input.up and entity:on_ladder() then
+    if (input.up or input.down) and entity:on_ladder() then
         entity.state = climbing.enter(entity)
     end
     if not input.left and not input.right then
@@ -76,7 +76,7 @@ function jumping.move(entity, input)
         entity.velocity.y = 0
         entity.state = falling.enter(entity)
     end
-    if input.up and entity:on_ladder() then
+    if (input.up or input.down) and entity:on_ladder() then
         entity.state = climbing.enter(entity)
     end
 end
@@ -96,7 +96,7 @@ function falling.move(entity, input)
             entity.state = walking.enter(entity)
         end
     end
-    if input.up and entity:on_ladder() then
+    if (input.up or input.down) and entity:on_ladder() then
         entity.state = climbing.enter(entity)
     end
 end
