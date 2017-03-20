@@ -133,6 +133,10 @@ function climbing.move(entity, input)
     if not entity:on_ladder() then
         entity.state = falling.enter(entity)
     end
+
+    if input.jump then
+        entity.state = jumping.enter(entity)
+    end
 end
 
 -- Global movement functions
