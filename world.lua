@@ -3,7 +3,6 @@ require("chili_monster")
 require("exit_door")
 require("utility")
 require("one_way_platform")
-require("slope")
 require("spawner")
 
 local sti = require "../libs/Simple-Tiled-Implementation/sti"
