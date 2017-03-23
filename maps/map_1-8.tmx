@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="300" height="64" tilewidth="16" tileheight="16" nextobjectid="7">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="300" height="64" tilewidth="16" tileheight="16" nextobjectid="12">
  <tileset firstgid="1" name="Outdoor_Tileset" tilewidth="16" tileheight="16" tilecount="64" columns="8">
   <image source="../assets/Outdoor_Tileset.png" width="128" height="128"/>
   <terraintypes>
@@ -451,6 +451,18 @@
     <property name="collidable" type="bool" value="true"/>
     <property name="is_enemy" type="bool" value="false"/>
     <property name="max_spawn" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="7" name="cash" x="1024" y="624" width="16" height="16">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="is_cash" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="8" name="cash" x="1120" y="496" width="16" height="16">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+    <property name="is_cash" type="bool" value="true"/>
    </properties>
   </object>
  </objectgroup>

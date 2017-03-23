@@ -8,7 +8,7 @@ return {
   height = 64,
   tilewidth = 16,
   tileheight = 16,
-  nextobjectid = 7,
+  nextobjectid = 12,
   properties = {},
   tilesets = {
     {
@@ -625,6 +625,38 @@ return {
             ["collidable"] = true,
             ["is_enemy"] = false,
             ["max_spawn"] = 3
+          }
+        },
+        {
+          id = 7,
+          name = "cash",
+          type = "",
+          shape = "rectangle",
+          x = 1024,
+          y = 624,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true,
+            ["is_cash"] = true
+          }
+        },
+        {
+          id = 8,
+          name = "cash",
+          type = "",
+          shape = "rectangle",
+          x = 1120,
+          y = 496,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true,
+            ["is_cash"] = true
           }
         }
       }

@@ -4,6 +4,7 @@ require("exit_door")
 require("utility")
 require("one_way_platform")
 require("spawner")
+require("cash")
 
 local sti = require "../libs/Simple-Tiled-Implementation/sti"
 local bump = require "../libs/bump_lua/bump"
@@ -15,6 +16,7 @@ world = {
         player_spawn = player,
         exit_door = exit_door,
         chili_spawner = chili_spawner,
+        cash = cash,
     }
 }
 

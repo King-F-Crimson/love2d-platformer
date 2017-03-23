@@ -1,12 +1,15 @@
 hud = {
     health_bar_pos = { x = 8, y = 8 },
+    cash_pos = { x = 8, y = 24 },
 
     heart = love.graphics.newImage("assets/Heart.png"),
-    heart_empty = love.graphics.newImage("assets/Heart_Empty.png")
+    heart_empty = love.graphics.newImage("assets/Heart_Empty.png"),
+    cash = love.graphics.newImage("assets/Cash.png"),
 }
 
 hud.heart:setFilter("nearest")
 hud.heart_empty:setFilter("nearest")
+hud.cash:setFilter("nearest")
 
 function hud:new(o)
     o = o or {}
@@ -36,5 +39,10 @@ function hud:draw()
         end
         love.graphics.draw(sprite, x, y)
     end
+
+    -- Draw cash icon and player's cash amount.
+    love.graphics.draw(self.cash, self.cash_pos.x, self.cash_pos.y)
+    love.graphics.print(self.player.cash, self.cash_pos.x + 24, self.cash_pos.y)
+
     love.graphics.pop()
 end

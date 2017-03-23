@@ -31,6 +31,10 @@ function entity:update()
 
 end
 
+function entity:init()
+
+end
+
 function entity:update_animations(dt)
 	-- The animation does not use dt but frame count.
     for k, animation in pairs(self.animation) do

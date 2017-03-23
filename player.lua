@@ -33,6 +33,7 @@ function player:init()
     self.acceleration = { x = 0, y = 0 }
     self.health = 3
     self.max_health = 3
+    self.cash = 0
 
     self.gun = grenade_launcher:new()
     self.gun:init()
@@ -126,6 +127,9 @@ function player:on_collision(cols, len)
     for i = 1, len do
         if cols[i].other.properties.is_enemy and self.invincibility_timer == 0 then
             self:damaged()
+        end
+        if cols[i].other.properties.is_cash then
+            self.cash = self.cash + 1
         end
     end
 end
