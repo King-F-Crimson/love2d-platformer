@@ -7,6 +7,10 @@ cash = entity:new({
 })
 cash.sprite:setFilter("nearest")
 
+function cash:init()
+    self.sound = love.audio.newSource("assets/cash.wav", "static")
+end
+
 function cash:on_collision(cols, len)
     for i = 1, len do
         if cols[i].other.properties.is_player then

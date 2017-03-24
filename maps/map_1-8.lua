@@ -8,7 +8,7 @@ return {
   height = 64,
   tilewidth = 16,
   tileheight = 16,
-  nextobjectid = 12,
+  nextobjectid = 31,
   properties = {},
   tilesets = {
     {
@@ -650,6 +650,262 @@ return {
           shape = "rectangle",
           x = 1120,
           y = 496,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true,
+            ["is_cash"] = true
+          }
+        },
+        {
+          id = 12,
+          name = "cash",
+          type = "",
+          shape = "rectangle",
+          x = 912,
+          y = 848,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true,
+            ["is_cash"] = true
+          }
+        },
+        {
+          id = 13,
+          name = "cash",
+          type = "",
+          shape = "rectangle",
+          x = 944,
+          y = 880,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true,
+            ["is_cash"] = true
+          }
+        },
+        {
+          id = 14,
+          name = "cash",
+          type = "",
+          shape = "rectangle",
+          x = 976,
+          y = 912,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true,
+            ["is_cash"] = true
+          }
+        },
+        {
+          id = 15,
+          name = "cash",
+          type = "",
+          shape = "rectangle",
+          x = 1008,
+          y = 928,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true,
+            ["is_cash"] = true
+          }
+        },
+        {
+          id = 16,
+          name = "cash",
+          type = "",
+          shape = "rectangle",
+          x = 1040,
+          y = 944,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true,
+            ["is_cash"] = true
+          }
+        },
+        {
+          id = 17,
+          name = "cash",
+          type = "",
+          shape = "rectangle",
+          x = 1072,
+          y = 944,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true,
+            ["is_cash"] = true
+          }
+        },
+        {
+          id = 18,
+          name = "cash",
+          type = "",
+          shape = "rectangle",
+          x = 1104,
+          y = 944,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true,
+            ["is_cash"] = true
+          }
+        },
+        {
+          id = 19,
+          name = "cash",
+          type = "",
+          shape = "rectangle",
+          x = 1136,
+          y = 944,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true,
+            ["is_cash"] = true
+          }
+        },
+        {
+          id = 20,
+          name = "cash",
+          type = "",
+          shape = "rectangle",
+          x = 1168,
+          y = 944,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true,
+            ["is_cash"] = true
+          }
+        },
+        {
+          id = 21,
+          name = "cash",
+          type = "",
+          shape = "rectangle",
+          x = 1200,
+          y = 928,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true,
+            ["is_cash"] = true
+          }
+        },
+        {
+          id = 22,
+          name = "cash",
+          type = "",
+          shape = "rectangle",
+          x = 1232,
+          y = 912,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true,
+            ["is_cash"] = true
+          }
+        },
+        {
+          id = 23,
+          name = "cash",
+          type = "",
+          shape = "rectangle",
+          x = 1248,
+          y = 864,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true,
+            ["is_cash"] = true
+          }
+        },
+        {
+          id = 24,
+          name = "cash",
+          type = "",
+          shape = "rectangle",
+          x = 1280,
+          y = 832,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true,
+            ["is_cash"] = true
+          }
+        },
+        {
+          id = 25,
+          name = "cash",
+          type = "",
+          shape = "rectangle",
+          x = 1296,
+          y = 784,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true,
+            ["is_cash"] = true
+          }
+        },
+        {
+          id = 29,
+          name = "cash",
+          type = "",
+          shape = "rectangle",
+          x = 864,
+          y = 848,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true,
+            ["is_cash"] = true
+          }
+        },
+        {
+          id = 30,
+          name = "cash",
+          type = "",
+          shape = "rectangle",
+          x = 1184,
+          y = 640,
           width = 16,
           height = 16,
           rotation = 0,
