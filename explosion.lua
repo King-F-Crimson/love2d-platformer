@@ -23,6 +23,11 @@ function explosion:init(x, y, world)
     self.w, self.h = 1, 1
     self.x, self.y = self.origin.x - (self.w / 2), self.origin.y - (self.h / 2)
     self.scale = 1/64
+
+    self.p_system = love.graphics.newParticleSystem(love.graphics.newImage("assets/Smoke_Particle.png"), 400)
+    self.p_system:setParticleLifetime(self.max_length / 60 * 0.5, self.max_length / 60)
+    self.p_system:setLinearAcceleration(-80, -80, 80, 80)
+    self.p_system:setColors(0, 0, 0, 255, 0, 0, 0, 128)
 end
 
 function explosion:update(dt)
@@ -34,6 +39,9 @@ function explosion:update(dt)
         self.h = self.w
         self.x, self.y = self.origin.x - (self.w / 2), self.origin.y - (self.h / 2)
 
+        self.p_system:update(dt)
+        self.p_system:emit(400)
+
         self.bump_world:update(self, self.x, self.y, self.w, self.h)
     else
         self.world:delete_entity(self)
@@ -41,5 +49,6 @@ function explosion:update(dt)
 end
 
 function explosion:draw()
-    love.graphics.draw(self.sprite, self.x, self.y, 0, self.scale, self.scale)
+    -- love.graphics.draw(self.sprite, self.x, self.y, 0, self.scale, self.scale)
+    love.graphics.draw(self.p_system, self.x, self.y, 0, 1, 1, self.scale * self.max_length * -0.5, self.scale * self.max_length * -0.5)
 end
