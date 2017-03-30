@@ -2,6 +2,7 @@ require("movement")
 require("animate")
 require("humanoid")
 require("grenade_launcher")
+require("thunder_spell")
 
 local anim8 = require '../libs/anim8/anim8'
 
@@ -39,6 +40,10 @@ function player:init()
     self.gun:init()
     self.gun.wielder = self
 
+    self.magic = thunder_spell:new()
+    self.magic:init()
+    self.magic.wielder = self
+
     self.animation, self.sprite = {}, {}
     self.animation[standing], self.sprite[standing] = animate("assets/trump_stand.png", 24)
     self.animation[walking],  self.sprite[walking]  = animate("assets/trump_walk.png", 12)
@@ -55,6 +60,7 @@ function player:get_control()
     control.up    = love.keyboard.isDown("up")
     control.jump  = love.keyboard.isDown("space") or love.keyboard.isDown("z")
     control.fire  = love.keyboard.isDown("x")
+    control.cast  = love.keyboard.isDown("c")
 
     return control
 end
@@ -112,9 +118,13 @@ function player:update(dt)
     self:move(control)
 
     self.gun:update(dt)
+    self.magic:update(dt)
 
     if control.fire and self.gun ~= nil then
         self.gun:fire()
+    end
+    if control.cast and self.magic ~= nil then
+        self.magic:cast()
     end
 end
 

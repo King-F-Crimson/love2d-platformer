@@ -20,11 +20,11 @@ function entity:new(o)
 end
 
 function entity:draw()
-	if self.facing_right then
-		love.graphics.draw(self.sprite, self.x, self.y, 0, 1, 1, self.origin.x, self.origin.y)
-	else
-		love.graphics.draw(self.sprite, self.x + self.w, self.y, 0, -1, 1, self.origin.x, self.origin.y)
-	end
+    if self.facing_right then
+        love.graphics.draw(self.sprite, self.x, self.y, 0, 1, 1, self.origin.x, self.origin.y)
+    else
+        love.graphics.draw(self.sprite, self.x + self.w, self.y, 0, -1, 1, self.origin.x, self.origin.y)
+    end
 end
 
 function entity:update()
@@ -36,7 +36,7 @@ function entity:init()
 end
 
 function entity:update_animations(dt)
-	-- The animation does not use dt but frame count.
+    -- The animation does not use dt but frame count.
     for k, animation in pairs(self.animation) do
         animation:update(1)
     end
