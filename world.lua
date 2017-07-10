@@ -136,14 +136,14 @@ function world:draw()
     local tx = player.x - screen.width / 2 + player.w / 2
     local ty = player.y - screen.height / 2 + player.w / 2
 
+    print(tx, ty)
+
     -- Apply world transform
     love.graphics.push()
-    love.graphics.scale(scale)
-    love.graphics.translate(-tx, -ty)
 
-    self.map:draw()
+    self.map:draw(-tx, -ty, scale, scale)
     if self.draw_hitbox then
-        self.map:bump_draw(self.bump_world)
+        self.map:bump_draw(self.bump_world, -tx, -ty, scale, scale)
     end
     love.graphics.pop()
 end
