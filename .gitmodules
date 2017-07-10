@@ -4,6 +4,7 @@
 [submodule "libs/Simple-Tiled-Implementation"]
 	path = libs/Simple-Tiled-Implementation
 	url = https://github.com/karai17/Simple-Tiled-Implementation
+	ignore = dirty
 [submodule "libs/bump_lua"]
 	path = libs/bump_lua
 	url = https://github.com/kikito/bump.lua
