@@ -136,8 +136,6 @@ function world:draw()
     local tx = player.x - screen.width / 2 + player.w / 2
     local ty = player.y - screen.height / 2 + player.w / 2
 
-    print(tx, ty)
-
     -- Apply world transform
     love.graphics.push()
 
